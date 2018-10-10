@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from vid_corner_app.models import UserProfileInfo
+from vid_corner_app.models import UserProfileInfo, Video_Upload
 
 
 
@@ -62,3 +62,15 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
         fields = ('channel_name', 'about', 'profile_picture', 'header_picture',)
+
+
+class VideoUploadForm(forms.ModelForm):
+    caption=forms.CharField(
+        label='',
+        widget=forms.Textarea( attrs={'placeholder': 'Give a video description'}
+        )
+    )
+
+    class Meta():
+        model=Video_Upload
+        fields = ('video', 'title', 'description')

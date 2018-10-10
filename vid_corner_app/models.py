@@ -17,4 +17,14 @@ class UserProfileInfo(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class Video_Upload(models.Model):
+    video = models.ImageField(upload_to=settings.VIDEO_ROOT)
+    created_at = models.DateTimeField()
+    title = models.CharField(max_length=70)
+    description = models.TextField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
+
+    def created_at_format(self):
+        return self.created_at.strftime('%b %e %Y')
     

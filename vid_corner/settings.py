@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'vid_corner_app/templates')
-PICTURE_DIR = os.path.join('vid_corner_app/media')
+VIDEO_DIR = os.path.join('vid_corner_app/media')
 STATIC_DIR = os.path.join(BASE_DIR, 'vid_corner_app/static')
 MEDIA_DIR = os.path.join('vid_corner_app/profile_pics')
 HEADER_DIR = os.path.join('vid_corner_app/header_pics')
@@ -130,7 +130,7 @@ MEDIA_ROOT = MEDIA_DIR
 HEADER_ROOT = HEADER_DIR
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-PICTURE_ROOT = PICTURE_DIR
+VIDEO_ROOT = VIDEO_DIR
 
 LOGIN_URL = '/vid_corner_app/user_login'
 
