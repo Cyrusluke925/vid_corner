@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+{% block content %}
+
+
+    <div class = "createProfForm">
+      <h1 class = "profWelc"> Thanks for creating an account, {{ user.username }}!</h1>
+      <h4> Please complete the following form:</h4>
+      <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type='submit'>Submit</button>
+        </form>
+    </div>
+
+
+  <!-- For CSS: Add textarea{resize:none} -->
+<!-- Note - do not continue to feed, profile won't get created -->
+
+{% endblock %}
