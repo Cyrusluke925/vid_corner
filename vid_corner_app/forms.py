@@ -65,11 +65,11 @@ class UserProfileInfoForm(forms.ModelForm):
 
 
 class VideoUploadForm(forms.ModelForm):
-    caption=forms.CharField(
-        label='',
-        widget=forms.Textarea( attrs={'placeholder': 'Give a video description'}
-        )
-    )
+    # caption=forms.CharField(
+    #     label='',
+    #     widget=forms.Textarea( attrs={'placeholder': 'Give a video description'}
+    #     )
+    # )
 
     class Meta():
         model=Video_Upload

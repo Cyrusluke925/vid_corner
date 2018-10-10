@@ -1,0 +1,11 @@
+form .navSearch {
+    align-self: center;
+    justify-self: center;
+}
+
+ul.nav.nav-pills {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-right: 3em;
+}

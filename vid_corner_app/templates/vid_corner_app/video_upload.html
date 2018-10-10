@@ -1,0 +1,12 @@
+{% extends 'vid_corner_app/base.html' %}
+
+{% block upload_video %}
+
+<form class = "newVidPost" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'>Submit</button>
+</form>
+
+
+{% endblock %}

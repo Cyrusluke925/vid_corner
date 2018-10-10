@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from vid_corner_app.forms import UserForm, UserProfileInfoForm
+from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-
+from .models import Video_Upload
+from django.utils import timezone
 
 # Create your views here.
 @login_required
@@ -19,6 +20,10 @@ def user_logout(request):
 def index(request):
     return render(request, 'vid_corner_app/index.html')
 
+
+def JsonResponseVideos(request):
+    videos = list(Video_Upload.objects.all().values('user', 'video', 'title', 'description', 'created_at'))
+    return JsonResponse({'videos': videos})
 
 def register(request):
     registered = False
@@ -47,7 +52,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('feed')
+                return redirect('index')
             else: 
                 return HttpResponse('Your account is inactive.')
         else:
@@ -87,3 +92,30 @@ def profile_create(request):
     form = UserProfileInfoForm()
 
     return render(request, 'vid_corner_app/profile_create.html', {'form': form})
+
+
+
+@login_required
+def video_upload(request):
+    if request.method == 'POST':
+        form = VideoUploadForm(request.POST, request.FILES)
+        print(request.FILES)
+        print(form.errors)
+
+        try:
+            title = request.POST['title']
+            video = request.FILES['video']
+            description = request.POST['description']
+        except KeyError as e:
+            return HttpResponse('Form invalid, missing key {}'.format(e))
+
+
+        created_at = timezone.datetime.now()
+        video = request.FILES['video']
+            
+        video_upload = Video_Upload(title=title, video=video,description=description, created_at=created_at, user=request.user)
+        video_upload.save()
+        return redirect('index')
+    else: 
+        form = VideoUploadForm()
+        return render(request,'vid_corner_app/video_upload.html', {'form':form})
