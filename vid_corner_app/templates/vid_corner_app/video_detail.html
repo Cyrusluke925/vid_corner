@@ -11,6 +11,14 @@
     <source src="{{video.video.url}}">
 </video>
 <h2 class='videoTitle'>{{ video.title }}</h2>
+<h1>{{video.id}}</h1>
+<form class="likeForm" method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+<input class='user' type='hidden' name='user' value={{request.user.id}}>
+<input type='hidden' class='videoId' name='videoId' value={{video.id}}>
+<button type='submit' class='videoLike'><i class="far fa-thumbs-up"></i></button>
+</form>
+
 <h4>{{ video.description }}</h4>
 
 <section class=commentSection>
@@ -42,6 +50,7 @@
     <a href="{% url 'video_detail' pk=video.pk %}"><video width="200px">
             <source src="{{video.video.url}}"></a>
         </video>
+        
     {% endfor %}
 </aside>
 </div>

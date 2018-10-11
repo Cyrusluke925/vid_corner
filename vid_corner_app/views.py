@@ -151,17 +151,19 @@ def video_detail(request, pk):
 
 @csrf_exempt
 def video_like(request, pk):
-    if VideoLike.objects.filter(video_upload=pk, user=request.user.id).exists():
+    print('enters like function')
+    if VideoLike.objects.filter(video=pk, user=request.user.id).exists():
         print('Already Exists')
         likes = []
         return JsonResponse({'likes': likes})
     else:
         if request.method == "POST":
             print("USER: ", request.user.id)
-
-            like = Like(video_id=pk, user=request.user)
+            
+            like = VideoLike(video_id=pk, user=request.user)
+            print(like)
             like.save()
-            likes = list(Like.objects.filter(video_upload=pk).values('video_upload', 'user'))
+            likes = list(VideoLike.objects.filter(video=pk).values('video', 'user'))
 
 
             return JsonResponse({'likes': likes})
