@@ -46,6 +46,7 @@ def register(request):
 
 
 def user_login(request):
+    print('hellooooo')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -53,7 +54,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('index')
+                return redirect('home')
             else: 
                 return HttpResponse('Your account is inactive.')
         else:
@@ -62,7 +63,7 @@ def user_login(request):
             return HttpResponse('Invalid login details given')
     else:
         #We might need to change the path when we create this form
-        return render(request, 'vid_corner_app/login.html', {})
+        return render(request, 'vid_corner_app/home.html', {})
 
 
 
