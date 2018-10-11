@@ -2,15 +2,15 @@
 {% load staticfiles %}
 
 {% block home %}
-<h2>HELLOOO</h2>
+
 {% for video in videos %}
-<h1>The Video Title is:  {{video.title}}</h1>
-<h1>{{video.description}}</h1>
-<h1>{{video.user}}</h1>
-<h1>{{video.video.url}}</h1>
-<video width=600px controls>
-    <source src={{video.video.url}}>
-</video>
+
+
+<h1>{{video.title}}</h1>
+
+<a href="{% url 'video_detail' pk=video.pk %}"><video width= 300px>
+    <source src='{{video.video.url}}' >
+</video></a>
 {% endfor %}
 
 

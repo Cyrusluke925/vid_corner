@@ -12,6 +12,7 @@ urlpatterns=[
     path('upload/video', views.video_upload, name='video_upload'),
     path('api/videos', views.JsonResponseVideos, name="JsonResponseVideos"),
     path('home', views.home, name="home"),
+    path('video/<int:pk>', views.video_detail, name='video_detail'),
 
     # path('api/users', views.sendJson, name='sendJson'),
     path('special',views.special, name='special'),

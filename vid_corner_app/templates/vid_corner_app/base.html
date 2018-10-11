@@ -76,12 +76,14 @@
 
       {% endif %}
     </header>
-    <div class="container">
+    <div>
     {% block content %}
     {% endblock %}
     {% block upload_video %}
     {% endblock %}
     {% block home %}
+    {% endblock %}
+    {% block video_detail %}
     {% endblock %}
     </div>
   </body>

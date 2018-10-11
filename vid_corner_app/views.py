@@ -129,3 +129,8 @@ def home(request):
     thevideos = paginator.get_page(page)
     print('The videos are', videos)
     return render(request, 'vid_corner_app/home.html', {'videos': thevideos})
+
+
+def video_detail(request, pk):
+    video = Video_Upload.objects.get(id=pk)
+    return render(request, 'vid_corner_app/video_detail.html', {'video': video})
