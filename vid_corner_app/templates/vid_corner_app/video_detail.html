@@ -6,17 +6,33 @@
 {% block video_detail %}
 
 
-<video width="779px" controls>
+<video width="700px" controls>
     <source src="{{video.video.url}}">
 </video>
 <h2 class='videoTitle'>{{ video.title }}</h2>
 <h4>{{ video.description }}</h4>
 
 <section class=commentSection>
-    <form id='commentForm' method="POST" enctype="multipart/form-data" type="submit">
+    {% if user.is_authenticated %}
+    <form id='commentForm' method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
+        <input type='text' name='content' placeholder='Add a public comment...'>
+        <button type="submit">SUBMIT</button>
     </form>
+    {% endif %}
+    <div class='theComments'>
+        {% for comment in video.comments.all %}
+        <ul class='commentList'>
+            <li class='commentAndUser'>
+                <div class='comment'>
+                    <p class='theUser' data-id='{{comment.user}}'>{{comment.user}}</p>
+                    <p class='theComment'>{{comment.content}}</p>
+                </div>
+            </li>
+
+        </ul>
+        {% endfor %}
+    </div>
 </section>
 
 

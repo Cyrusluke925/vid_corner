@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from .models import Video_Upload
+from .models import Video_Upload, Comment
 from django.utils import timezone
 from django.core.paginator import Paginator
 
@@ -16,7 +16,7 @@ def special(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect('index')
+    return redirect('home')
 
 def index(request):
     return render(request, 'vid_corner_app/index.html')
@@ -132,12 +132,16 @@ def home(request):
 
 
 def video_detail(request, pk):
+    video = Video_Upload.objects.get(id=pk)
     if request.method == 'POST':
+    
         form = CommentForm(request.POST)
         created_at = timezone.datetime.now()
         if form.is_valid():
             content = form.cleaned_data.get('content')
-            comment = Comment(content=content, created_at=created_at, user=request.user)
-            print(comment)
-    video = Video_Upload.objects.get(id=pk)
+            
+            comment = Comment(content=content, created_at=created_at, user=request.user, video=video)
+            comment.save()
+            
+    
     return render(request, 'vid_corner_app/video_detail.html', {'video': video})
