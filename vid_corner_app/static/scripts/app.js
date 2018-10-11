@@ -25,11 +25,11 @@ $('.videoLike').on('click', function(e) {
                     url: deleteEndpoint,
                     data: theScoop,
                     success: function deleteSuccess(response) {
-                        console.log('success')
+                        console.log('already liked so deleting')
                     }
                 })
             }
-            console.log(json)
+            
         }
     })
 })

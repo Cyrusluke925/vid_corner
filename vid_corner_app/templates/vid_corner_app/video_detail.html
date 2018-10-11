@@ -18,6 +18,12 @@
 <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
 <button type='submit' class='videoLike'><i class="far fa-thumbs-up"></i></button>
 </form>
+<form class="likeForm" method="POST" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <input class='user' type='hidden' name='user' value={{request.user.id}}>
+    <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
+    <button type='submit' class='videoDisike'><i class="far fa-thumbs-down"></i></button>
+</form>
 
 <h4>{{ video.description }}</h4>
 
