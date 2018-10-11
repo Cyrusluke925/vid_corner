@@ -11,7 +11,7 @@ class UserProfileInfo(models.Model):
     channel_name = models.CharField(max_length=70)
     about = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(blank=True, upload_to=settings.MEDIA_ROOT, null=True, default=settings.MEDIA_ROOT+'/defaultprofile.jpg')
-    header_picture = models.ImageField(blank=True, upload_to=settings.HEADER_ROOT, null=True, default=settings.HEADER_ROOT+'/defaultheader.jpg')
+    header_picture = models.ImageField(blank=True, upload_to=settings.MEDIA_ROOT, null=True, default=settings.MEDIA_ROOT+'/defaultheader.jpg')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):

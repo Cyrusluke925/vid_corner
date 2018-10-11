@@ -19,7 +19,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'vid_corner_app/templates')
 VIDEO_DIR = os.path.join('vid_corner_app/media')
 STATIC_DIR = os.path.join(BASE_DIR, 'vid_corner_app/static')
 MEDIA_DIR = os.path.join('vid_corner_app/profile_pics')
-HEADER_DIR = os.path.join('vid_corner_app/header_pics')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -127,12 +128,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
-HEADER_ROOT = HEADER_DIR
+
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 VIDEO_ROOT = VIDEO_DIR
 
-LOGIN_URL = '/vid_corner_app/user_login'
+LOGIN_URL = '/vid_corner_app/user_login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

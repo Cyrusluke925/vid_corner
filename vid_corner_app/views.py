@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Video_Upload
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -119,3 +120,12 @@ def video_upload(request):
     else: 
         form = VideoUploadForm()
         return render(request,'vid_corner_app/video_upload.html', {'form':form})
+
+
+def home(request):
+    videos = Video_Upload.objects.all().order_by('?')
+    paginator = Paginator(videos, 9)
+    page = request.GET.get('page')
+    thevideos = paginator.get_page(page)
+    print('The videos are', videos)
+    return render(request, 'vid_corner_app/home.html', {'videos': thevideos})
