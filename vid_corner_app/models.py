@@ -44,5 +44,13 @@ class VideoLike(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class VideoDislike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    video = models.ForeignKey(Video_Upload, on_delete=models.CASCADE, related_name='video_upload')
+
+    def __str__(self):
+        return self.user.username
     
     
