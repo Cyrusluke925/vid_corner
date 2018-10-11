@@ -1,3 +1,6 @@
+
+
+
 form .navSearch {
     align-self: center;
     justify-self: center;
@@ -14,4 +17,14 @@ ul.nav.nav-pills {
     font-family: Roboto;
     font-size: 28px;
     line-height: 24px;
+}
+
+.entirePage {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5em;
+}
+
+aside {
+    width: 200px
 }

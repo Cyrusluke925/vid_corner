@@ -4,8 +4,9 @@
 
 
 {% block video_detail %}
+<div class='entirePage'>
 
-
+<div class='videoAndComments'>
 <video width="700px" controls>
     <source src="{{video.video.url}}">
 </video>
@@ -34,7 +35,14 @@
         {% endfor %}
     </div>
 </section>
-
-
-
+</div>
+<aside>
+    <h1>HELLOOO</h1>
+    {% for video in videos %}
+    <a href="{% url 'video_detail' pk=video.pk %}"><video width="200px">
+            <source src="{{video.video.url}}"></a>
+        </video>
+    {% endfor %}
+</aside>
+</div>
 {% endblock %}

@@ -16,5 +16,6 @@ urlpatterns=[
 
     # path('api/users', views.sendJson, name='sendJson'),
     path('special',views.special, name='special'),
+    path('video/<int:pk>/like', views.video_like, name="video_like"),
 ]
 

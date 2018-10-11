@@ -3,8 +3,9 @@ from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm,
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from .models import Video_Upload, Comment
+from .models import Video_Upload, Comment, VideoLike
 from django.utils import timezone
 from django.core.paginator import Paginator
 
@@ -68,7 +69,7 @@ def user_login(request):
 
 
 
-
+@login_required
 def profile_create(request):
     #add registered false and true
     if request.method == "POST":
@@ -85,7 +86,7 @@ def profile_create(request):
             print(request.POST)
             print(request.FILES)
 
-            return render(request, 'vid_corner_app/profile_view.html')
+            return render(request, 'vid_corner_app/home.html')
         else: 
             print(form.errors)
             return render(request, 'vid_corner_app/profile_create.html', {'form': form})
@@ -117,7 +118,7 @@ def video_upload(request):
             
         video_upload = Video_Upload(title=title, video=video,description=description, created_at=created_at, user=request.user)
         video_upload.save()
-        return redirect('index')
+        return redirect('home')
     else: 
         form = VideoUploadForm()
         return render(request,'vid_corner_app/video_upload.html', {'form':form})
@@ -128,7 +129,7 @@ def home(request):
     paginator = Paginator(videos, 9)
     page = request.GET.get('page')
     thevideos = paginator.get_page(page)
-    print('The videos are', videos)
+    
     return render(request, 'vid_corner_app/home.html', {'videos': thevideos})
 
 
@@ -143,6 +144,26 @@ def video_detail(request, pk):
             
             comment = Comment(content=content, created_at=created_at, user=request.user, video=video)
             comment.save()
-            
     
-    return render(request, 'vid_corner_app/video_detail.html', {'video': video})
+    videos = Video_Upload.objects.all()[:5]
+    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos})
+
+
+@csrf_exempt
+def video_like(request, pk):
+    if VideoLike.objects.filter(video_upload=pk, user=request.user.id).exists():
+        print('Already Exists')
+        likes = []
+        return JsonResponse({'likes': likes})
+    else:
+        if request.method == "POST":
+            print("USER: ", request.user.id)
+
+            like = Like(video_id=pk, user=request.user)
+            like.save()
+            likes = list(Like.objects.filter(video_upload=pk).values('video_upload', 'user'))
+
+
+            return JsonResponse({'likes': likes})
+            
+        
