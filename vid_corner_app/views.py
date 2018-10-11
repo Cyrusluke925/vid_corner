@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from .models import Video_Upload, Comment, VideoLike
+from .models import Video_Upload, Comment, VideoLike, VideoDislike
 from django.utils import timezone
 from django.core.paginator import Paginator
 
@@ -153,9 +153,14 @@ def video_detail(request, pk):
 def video_like(request, pk):
     print('enters like function')
     if VideoLike.objects.filter(video=pk, user=request.user.id).exists():
-        print('Already Exists')
+        print('You are in the like function and LIKE already Exists')
         likes = []
         return JsonResponse({'likes': likes})
+
+    elif VideoDislike.objects.filter(video=pk, user=request.user.id).exists():
+            print('You are in the like function and DISLIKE Already Exists')
+            dislikes = []
+            return JsonResponse({'dislikes': dislikes})
     else:
         if request.method == "POST":
             print("USER: ", request.user.id)
@@ -170,11 +175,44 @@ def video_like(request, pk):
 
 
 @csrf_exempt
+def video_dislike(request, pk):
+    print('enters dislike function')
+    if VideoLike.objects.filter(video=pk, user=request.user.id).exists():
+        print('You are in the dislike function and LIKE Already Exists')
+        likes = []
+        return JsonResponse({'likes': likes})
+
+    elif VideoDislike.objects.filter(video=pk, user=request.user.id).exists():
+            print('You are in the Dislike function and DISLIKE Already Exists')
+            dislikes = []
+            return JsonResponse({'dislikes': dislikes})
+    else:
+        if request.method == "POST":
+            print("USER: ", request.user.id)
+            
+            dislike = VideoDislike(video_id=pk, user=request.user)
+
+            print('disliking noww')
+            dislike.save()
+            # likes = list(VideoLike.objects.filter(video=pk).values('video', 'user'))
+    return HttpResponse('disliked')
+
+
+@csrf_exempt
 def video_like_delete(request, pk):
+    print('so you are deleting your like now')
     if request.method == "DELETE":
-        print('entered delete function')
         video_like = VideoLike.objects.filter(video=pk, user=request.user.id)
         video_like.delete()
-    return HttpResponse('hello')
+    return HttpResponse('like deleted')
+
+@csrf_exempt
+def video_dislike_delete(request, pk):
+    print('you entered the delete dislike function')
+    if request.method == 'DELETE':
+        video_dislike = VideoDislike.objects.filter(video=pk, user=request.user.id)
+        video_dislike.delete()
+    return HttpResponse('dislike object deleted')
+
 
         

@@ -34,3 +34,44 @@ $('.videoLike').on('click', function(e) {
     })
 })
 
+
+
+
+$('.videoDislike').on('click', function(e) {
+    var form = $('.likeForm').serialize()
+    var videoId = $('.videoId').attr('value')
+    var user = $('.user').attr('value')
+
+    var dislikeInfo = {
+        form: form,
+        videoId: videoId,
+        user: user
+    }
+
+    console.log(dislikeInfo)
+    var dislikeEndpoint = `http://localhost:8000/video/${videoId}/dislike`
+    var deleteEndpoint = `http://localhost:8000/video/${videoId}/dislike/delete`
+    e.preventDefault()
+
+
+$.ajax({
+    method: "POST",
+    url: dislikeEndpoint,
+    data: dislikeInfo,
+    success: function dislikeSuccess(json) {
+
+        if (json.dislikes.length === 0) {
+            $.ajax({
+                method: "DELETE",
+                url: deleteEndpoint,
+                data: dislikeInfo,
+                success: function deleteSuccess(response) {
+                    console.log('already disliked so deleting dislike')
+                }
+            })
+        }
+    },
+})
+
+})
+
