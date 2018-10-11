@@ -9,3 +9,9 @@ ul.nav.nav-pills {
     align-items: center;
     margin-right: 3em;
 }
+
+.videoTitle {
+    font-family: Roboto;
+    font-size: 28px;
+    line-height: 24px;
+}

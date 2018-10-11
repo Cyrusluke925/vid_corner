@@ -27,4 +27,14 @@ class Video_Upload(models.Model):
 
     def created_at_format(self):
         return self.created_at.strftime('%b %e %Y')
+
+
+class Comment(models.Model):
+    content = models.CharField(max_length=700, default="")
+    created_at = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    video = models.ForeignKey(Video_Upload, on_delete = models.CASCADE, related_name='comments')
+
+    def created_at_formatted(self):
+        return self.created_at.strftime('%b %e %Y')
     

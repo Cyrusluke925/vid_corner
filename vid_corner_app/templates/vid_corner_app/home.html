@@ -6,11 +6,13 @@
 {% for video in videos %}
 
 
-<h1>{{video.title}}</h1>
 
+<div class="singleVideo">
 <a href="{% url 'video_detail' pk=video.pk %}"><video width= 300px>
     <source src='{{video.video.url}}' >
 </video></a>
+<h4>{{video.title}}</h4>
+</div>
 {% endfor %}
 
 

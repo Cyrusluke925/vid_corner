@@ -1,8 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from vid_corner_app.models import UserProfileInfo, Video_Upload
+from vid_corner_app.models import UserProfileInfo, Video_Upload, Comment
 
-
+class CommentForm(forms.ModelForm):
+    class Meta():
+        model = Comment
+        fields = ('content',)
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(
@@ -74,3 +77,6 @@ class VideoUploadForm(forms.ModelForm):
     class Meta():
         model=Video_Upload
         fields = ('video', 'title', 'description')
+
+
+    

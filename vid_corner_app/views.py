@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm
+from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -132,5 +132,12 @@ def home(request):
 
 
 def video_detail(request, pk):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        created_at = timezone.datetime.now()
+        if form.is_valid():
+            content = form.cleaned_data.get('content')
+            comment = Comment(content=content, created_at=created_at, user=request.user)
+            print(comment)
     video = Video_Upload.objects.get(id=pk)
     return render(request, 'vid_corner_app/video_detail.html', {'video': video})

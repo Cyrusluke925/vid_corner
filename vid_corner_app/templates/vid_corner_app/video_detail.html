@@ -5,8 +5,20 @@
 
 {% block video_detail %}
 
-<h2>{{ video.title }} <a href=""></a></h2>
+
+<video width="779px" controls>
+    <source src="{{video.video.url}}">
+</video>
+<h2 class='videoTitle'>{{ video.title }}</h2>
 <h4>{{ video.description }}</h4>
+
+<section class=commentSection>
+    <form id='commentForm' method="POST" enctype="multipart/form-data" type="submit">
+        {% csrf_token %}
+        
+    </form>
+</section>
+
 
 
 {% endblock %}
