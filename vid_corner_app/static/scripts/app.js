@@ -10,13 +10,25 @@ $('.videoLike').on('click', function(e) {
         user: user
     }
 
-    var urlEndpoint = `http://localhost:8000/video/${videoId}/like`
+    var likeEndpoint = `http://localhost:8000/video/${videoId}/like`
+
+    var deleteEndpoint = `http://localhost:8000/video/${videoId}/like/delete`
 
     $.ajax({
         method: "POST",
-        url: urlEndpoint,
+        url: likeEndpoint,
         data: theScoop,
         success: function likeSucess(json) {
+            if (json.likes.length === 0) {
+                $.ajax({
+                    method: "DELETE",
+                    url: deleteEndpoint,
+                    data: theScoop,
+                    success: function deleteSuccess(response) {
+                        console.log('success')
+                    }
+                })
+            }
             console.log(json)
         }
     })

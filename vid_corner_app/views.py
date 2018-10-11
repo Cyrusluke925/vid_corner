@@ -167,5 +167,14 @@ def video_like(request, pk):
 
 
             return JsonResponse({'likes': likes})
-            
+
+
+@csrf_exempt
+def video_like_delete(request, pk):
+    if request.method == "DELETE":
+        print('entered delete function')
+        video_like = VideoLike.objects.filter(video=pk, user=request.user.id)
+        video_like.delete()
+    return HttpResponse('hello')
+
         
