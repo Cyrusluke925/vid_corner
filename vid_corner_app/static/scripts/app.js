@@ -58,11 +58,41 @@ $.ajax({
 
 
 
+var getType = (function() {
+
+    var objToString = ({}).toString ,
+        typeMap     = {},
+        types = [ 
+          "Boolean", 
+          "Number", 
+          "String",                
+          "Function", 
+          "Array", 
+          "Date",
+          "RegExp", 
+          "Object", 
+          "Error"
+        ];
+
+    for ( var i = 0; i < types.length ; i++ ){
+        typeMap[ "[object " + types[i] + "]" ] = types[i].toLowerCase();
+    };    
+
+    return function( obj ){
+        if ( obj == null ) {
+            return String( obj );
+        }
+        // Support: Safari <= 5.1 (functionish RegExp)
+        return typeof obj === "object" || typeof obj === "function" ?
+            typeMap[ objToString.call(obj) ] || "object" :
+            typeof obj;
+    }
+}());
+
 
 
 $('.videoLike').on('click', function(e) {
     e.preventDefault()
-    
     var form = $('.likeForm').serialize()
     var videoId = $('.videoId').attr('value')
     var user = $('.user').attr('value')
@@ -84,6 +114,7 @@ $('.videoLike').on('click', function(e) {
         success: function likeSucess(json) {
             console.log(json)
             if(json.likes.length !== 0) {
+                $('.likeCounter').text(parseInt($('.likeCounter').attr('data-id')) + 1)
                 $('.videoLike').addClass('likeColor')
             }
             
@@ -96,6 +127,7 @@ $('.videoLike').on('click', function(e) {
                     success: function deleteSuccess(response) {
                         
                         $('.videoLike').removeClass('likeColor')
+                        $('.likeCounter').text(parseInt($('.likeCounter').attr('data-id')))
                         console.log('already liked so deleting')
                     }
                 })
@@ -109,6 +141,7 @@ $('.videoLike').on('click', function(e) {
 
 
 $('.videoDislike').on('click', function(e) {
+    
     var form = $('.likeForm').serialize()
     var videoId = $('.videoId').attr('value')
     var user = $('.user').attr('value')
@@ -131,8 +164,11 @@ $.ajax({
     data: dislikeInfo,
     success: function dislikeSuccess(json) {
         console.log(json)
+
         if (json.dislikes.length !== 0) {
             $('.videoDislike').addClass('likeColor')
+            $('.dislikeCounter').text(parseInt($('.dislikeCounter').attr('data-id')) - 1)
+            
         }
         else if (json.dislikes.length === 0) {
             $('.videoDislike').removeClass('likeColor')
@@ -142,6 +178,7 @@ $.ajax({
                 data: dislikeInfo,
                 success: function deleteSuccess(response) {
                     $('.videoDislike').removeClass('likeColor')
+                    $('.dislikeCounter').text(parseInt($('.dislikeCounter').attr('data-id')))
                     console.log('already disliked so deleting dislike')
                 }
             })

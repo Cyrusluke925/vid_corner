@@ -155,15 +155,15 @@ def video_detail(request, pk):
             comment = Comment(content=content, created_at=created_at, user=request.user, video=video)
             comment.save()
 
-    else:
-        
-        likes = VideoLike.objects.filter(video=video)
-        dislikes = VideoDislike.objects.filter(video=video)
 
         
-        numberOfDislikes = dislikes.all().count()
-        
-        numberOfLikes = likes.all().count()
+    likes = VideoLike.objects.filter(video=video)
+    dislikes = VideoDislike.objects.filter(video=video)
+
+    
+    numberOfDislikes = dislikes.all().count()
+    
+    numberOfLikes = likes.all().count()
         
 
     videos = Video_Upload.objects.all()[:5]

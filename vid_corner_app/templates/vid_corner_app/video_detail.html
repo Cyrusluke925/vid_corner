@@ -18,14 +18,14 @@
 <input class='user' type='hidden' name='user' value={{request.user.id}}>
 <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
 <button type='submit' class='videoLike'><i class="far fa-thumbs-up"></i></button>
-<h4>{{numberOfLikes}}</h4>
+<h4 class='likeCounter' data-id='{{numberOfLikes}}'>{{numberOfLikes}}</h4>
 </form>
 <form class="dislikeForm" method="POST" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     <input class='user' type='hidden' name='user' value={{request.user.id}}>
     <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
     <button type='submit' class='videoDislike'><i class="far fa-thumbs-down"></i></button>
-    <h4>{{numberOfDislikes}}</h4>
+    <h4 class='dislikeCounter' data-id='{{numberOfDislikes}}'>{{numberOfDislikes}}</h4>
 </form>
 </section>
 </section>
