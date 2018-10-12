@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from .models import Video_Upload, Comment, VideoLike, VideoDislike
+from .models import Video_Upload, Comment, VideoLike, VideoDislike, Subscribe, User
 from django.utils import timezone
 from django.core.paginator import Paginator
 import json
@@ -33,6 +33,9 @@ def sendJsonComments(request):
     comments = list(Comment.objects.all().values('content', 'created_at', 'user', 'video'))
     return JsonResponse({'comments': comments})
 
+def sendJsonSubscriptions(request):
+    subscriptions = list(Subscribe.objects.all().values('subscriber_to', 'subscriber_from'))
+    return JsonResponse({'subscriptions':subscriptions})
 
 def sendJsonDislikes(request):
     dislikes = list(VideoDislike.objects.all().values('video', 'user'))
@@ -181,6 +184,26 @@ def video_detail(request, pk):
     return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes})
 
 
+@csrf_exempt
+@login_required
+def subscribe(request, pk):
+    print('ENTERED THE SUBSCRIBER FUNCTION*************************************')
+    subscriber_to = User.objects.get(id=pk)
+    print('LINE 189 *************************************************************')
+    if Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id).exists():
+        print('This Exists')
+        return HttpResponse('This Exists')
+    else:
+        print('LINE 193**********************************************************')
+        if request.method == 'POST':
+            print('******************  METHOD IS A POST   *************************')
+            subscribe = Subscribe(subscriber_to=subscriber_to, subscriber_from=request.user)
+            print('**************** YOU MADE IT THIS FAR ***************')
+            subscribe.save()
+            return JsonResponse({'message': f'{request.user.username} followed the user with the id of {pk}'})
+
+
+@login_required
 @csrf_exempt
 def video_like(request, pk):
     print('enters like function')

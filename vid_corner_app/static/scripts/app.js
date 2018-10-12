@@ -200,55 +200,6 @@ $.ajax({
 
 
 
-// $.ajax({
-
-//     method: "GET",
-//     url: 'http://localhost:8000/api/comments',
-//     success: function onSuccess(response) {
-//         for (var i = 0; i < response.comments.length; i += 1) {
-//             var comment = response.comments[i];
-//             console.log(comment.)
-//         }
-//     }
-// })
-
-// for(var i = 0; i < $('.comment').length; i += 1) {
-//     var singleComment = $('.comment')[i]
-//     console.log(singleComment)
-
-// }
-
-// $('.commentForm').on('submit', function(e) {
-//     e.preventDefaul()
-//     $.ajax({
-//         method: 'GET',
-//         url: 
-//     })
-//     var form = $('.commentForm').serialize()
-//     var videoId = $('.videoId').attr('value')
-//     var user = $('.user').attr('value')
-
-//     var commentData = {
-//         form: form,
-//         videoId: videoId,
-//         user: user
-//     }
-
-
-   
-
-// $.ajax({
-//     method: 'POST',
-//     url: `http://localhost:8000/video/${videoId}/comment`,
-//     data: commentData,
-//     success: function onSuccess(json) {
-//         console.log(json)
-//     }
-// })
-
-
-// })
-
 
 
 
@@ -273,7 +224,7 @@ $('.commentForm').on('submit', function(e) {
 
 
         var commentData = {
-           
+        
             video: videoId,
             user: user,
             content: commentContent
@@ -295,4 +246,77 @@ $('.commentForm').on('submit', function(e) {
 
 
 
+$('.subscribeForm').on('submit', function(e) {
+    e.preventDefault()
 
+let form = $('.subscribeForm').serialize()
+let subscriber_from = $('.theSubscriberId').attr('value')
+let subscriber_to = $('.theSubscribeeId').attr('value')
+
+let subscriberData = {
+    form: form,
+    subscriber_from: subscriber_from,
+    subscriber_to: subscriber_to
+}
+
+    $.ajax({
+        method: 'POST',
+        url: `http://localhost:8000/user/${subscriber_to}/subscribe`,
+        data: subscriberData,
+        success: function onSuccess(response) {
+            console.log(response)
+        }
+    })
+
+})
+
+
+$('.videoLike').on('click', function(e) {
+    e.preventDefault()
+    var form = $('.likeForm').serialize()
+    var videoId = $('.videoId').attr('value')
+    var user = $('.user').attr('value')
+    
+    var theScoop = {
+        form: form,
+        videoId: videoId,
+        user: user
+    }
+
+    var likeEndpoint = `http://localhost:8000/video/${videoId}/like`
+
+    var deleteEndpoint = `http://localhost:8000/video/${videoId}/like/delete`
+
+    $.ajax({
+        method: "POST",
+        url: likeEndpoint,
+        data: theScoop,
+        success: function likeSucess(json) {
+            // console.log(json)
+            if(json.likes.length !== 0) {
+                var value = parseInt($('.likeCounter').text())
+                $('.likeCounter').text(value + 1)
+                $('.videoLike').addClass('likeColor')
+            }
+            
+            else if (json.likes.length === 0) {
+                
+                $.ajax({
+                    method: "DELETE",
+                    url: deleteEndpoint,
+                    data: theScoop,
+                    success: function deleteSuccess(response) {
+                        
+                        $('.videoLike').removeClass('likeColor')
+                        
+                        var value = parseInt($('.likeCounter').text())
+                        $('.likeCounter').text(value - 1)
+                        
+                        // console.log('already liked so deleting')
+                    }
+                })
+            }
+            
+        }
+    })
+})
