@@ -198,3 +198,101 @@ $.ajax({
 });
 
 
+
+
+// $.ajax({
+
+//     method: "GET",
+//     url: 'http://localhost:8000/api/comments',
+//     success: function onSuccess(response) {
+//         for (var i = 0; i < response.comments.length; i += 1) {
+//             var comment = response.comments[i];
+//             console.log(comment.)
+//         }
+//     }
+// })
+
+// for(var i = 0; i < $('.comment').length; i += 1) {
+//     var singleComment = $('.comment')[i]
+//     console.log(singleComment)
+
+// }
+
+// $('.commentForm').on('submit', function(e) {
+//     e.preventDefaul()
+//     $.ajax({
+//         method: 'GET',
+//         url: 
+//     })
+//     var form = $('.commentForm').serialize()
+//     var videoId = $('.videoId').attr('value')
+//     var user = $('.user').attr('value')
+
+//     var commentData = {
+//         form: form,
+//         videoId: videoId,
+//         user: user
+//     }
+
+
+   
+
+// $.ajax({
+//     method: 'POST',
+//     url: `http://localhost:8000/video/${videoId}/comment`,
+//     data: commentData,
+//     success: function onSuccess(json) {
+//         console.log(json)
+//     }
+// })
+
+
+// })
+
+
+
+
+
+
+$('.commentForm').on('submit', function(e) {
+    e.preventDefault()
+    var commentContent=$('.commentBox').val()
+    var form = $('.commentForm').serialize()
+    var videoId = $('.videoId').attr('value')
+    var user = $('.user').attr('value')
+    var username = $('.username').attr('value')
+
+
+
+    $('.theComments').prepend(`<ul class='commentList'>
+    <li class='commentAndUser'>
+        <div class='comment'>
+            <p class='theUser' data-id='${user}'>${username}</p>
+            <p class='theComment'>${commentContent}</p>
+        </div>`)
+
+
+        var commentData = {
+           
+            video: videoId,
+            user: user,
+            content: commentContent
+        }
+
+    $.ajax({
+        method: 'POST',
+        url:   `http://localhost:8000/video/${videoId}`,
+        data: commentData,
+        success: function onSuccess(response) {
+            $('.commentBox').val(' ')
+        }
+    })
+
+
+
+})
+
+
+
+
+

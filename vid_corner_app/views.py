@@ -8,6 +8,7 @@ from django.conf import settings
 from .models import Video_Upload, Comment, VideoLike, VideoDislike
 from django.utils import timezone
 from django.core.paginator import Paginator
+import json
 
 # Create your views here.
 @login_required
@@ -26,6 +27,11 @@ def index(request):
 def sendJsonLikes(request):
     likes = list(VideoLike.objects.all().values('video', 'user'))
     return JsonResponse({'likes': likes})
+
+
+def sendJsonComments(request):
+    comments = list(Comment.objects.all().values('content', 'created_at', 'user', 'video'))
+    return JsonResponse({'comments': comments})
 
 
 def sendJsonDislikes(request):
@@ -142,8 +148,10 @@ def home(request):
     
     return render(request, 'vid_corner_app/home.html', {'videos': thevideos})
 
-
+@csrf_exempt
 def video_detail(request, pk):
+    print(request)
+    print(request)
     video = Video_Upload.objects.get(id=pk)
     views = video.views = video.views + 1
     video.save()
@@ -155,6 +163,7 @@ def video_detail(request, pk):
             content = form.cleaned_data.get('content')
             
             comment = Comment(content=content, created_at=created_at, user=request.user, video=video)
+
             comment.save()
 
 
@@ -195,6 +204,10 @@ def video_like(request, pk):
 
 
             return JsonResponse({'likes': likes})
+
+
+    
+    
 
 
 @csrf_exempt

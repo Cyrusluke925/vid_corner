@@ -14,15 +14,17 @@ urlpatterns=[
     path('home', views.home, name="home"),
     path('video/<int:pk>', views.video_detail, name='video_detail'),
 
-
+    
     path('special',views.special, name='special'),
     path('video/<int:pk>/like', views.video_like, name="video_like"),
     path('video/<int:pk>/like/delete', views.video_like_delete, name='video_like_delete'),
     path('video/<int:pk>/dislike', views.video_dislike, name='video_dislike'),
     path('video/<int:pk>/dislike/delete', views.video_dislike_delete, name='video_dislike_delete'),
+    
 
 
     path('api/likes', views.sendJsonLikes, name='sendJsonLikes'),
     path('api/dislikes', views.sendJsonDislikes, name='sendJsonDislikes'),
+    path('api/comments', views.sendJsonComments, name='sendJsonComments'),
 ]
 

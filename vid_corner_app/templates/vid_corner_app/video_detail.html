@@ -55,10 +55,13 @@
 
 <section class=commentSection>
     {% if user.is_authenticated %}
-    <form id='commentForm' method="POST" enctype="multipart/form-data">
+    <form class='commentForm' method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type='text' name='content' placeholder='Add a public comment...'>
-        <button type="submit">SUBMIT</button>
+        <input class='user' type='hidden' name='user' value={{request.user.id}}>
+        <input type='hidden' class='videoId' name='videoId' value={{video.id}}> 
+        <input type='hidden' class='username' name='username' value='{{request.user.username}}'>
+        <input class='commentBox' type='text' name='content' placeholder='Add a public comment...'>
+        <button class='commentButton' type="submit">SUBMIT</button>
     </form>
     {% endif %}
     <div class='theComments'>

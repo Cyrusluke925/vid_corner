@@ -37,6 +37,15 @@ ul.nav.nav-pills {
     margin-top: 5em;
 }
 
+.commentBox {
+    width: 100%;
+}
+
+.commentButton {
+    float: right;
+    display:none;
+}
+
 aside {
     width: 200px
 }
