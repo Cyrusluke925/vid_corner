@@ -7,7 +7,7 @@
 <div class='entirePage'>
 
 <div class='videoAndComments'>
-<video width="700px" controls>
+<video controls>
     <source src="{{video.video.url}}">
 </video>
 <section class='titleAndRatings'>
@@ -32,8 +32,25 @@
 </form>
 </section>
 </section>
+<section class="userInfo">
+    <div class='video_uploader'>
+    <div class='pictureAndChannelName'>
+    <img class="user_profile_picture" src='{{video.user.profile.profile_picture.url}}'>
+    <h5 class='channelName'>{{video.user.profile.channel_name}}</h5>
+    </div>
+    <form class='subscribeForm' method='POST' enctype="multipart/form-data" novalidate>
+        <input type='hidden' class='theSubscriberId' value={{request.user.id}}>
+        <input type='hidden' class='theSubscribeeId' value={{video.user.id}}>
+        <button type='submit' class='subscribeButton'>SUBSCRIBE</button>
+    </form>
+    
+    </div>
+    <div class='videoDescription'>
+            <p class=descriptionText>{{ video.description }}</p>
+    </div>
+</section>
 
-<h4>{{ video.description }}</h4>
+
 
 
 <section class=commentSection>

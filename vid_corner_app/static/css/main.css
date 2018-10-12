@@ -15,10 +15,22 @@ ul.nav.nav-pills {
 
 .videoTitle {
     font-family: Roboto;
-    font-size: 28px;
+    font-size: 22px;
     line-height: 24px;
 }
 
+.descriptionText {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 5em;
+    margin-top: 2em;
+    padding-bottom: 1em;
+}
+
+.userInfo {
+    border-top: 0.8px solid lightgrey;
+    border-bottom: 0.8px solid lightgrey;
+}
 .entirePage {
     display: flex;
     justify-content: space-around;
@@ -45,4 +57,55 @@ aside {
 
 .views {
     color: grey;
+    font-weight: 400;
+    font-size: 1.05em;
+
+}
+
+.video_uploader {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.user_profile_picture {
+    width:55px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit:cover;
+}
+
+
+.entirePage {
+    max-width: 100%;
+}
+
+.currentPage {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 915px) {
+    aside {
+        display: none;
+    }
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.videoAndComments {
+    max-width: 750px;
+}
+
+.pictureAndChannelName {
+    display: flex;
+    
+}
+
+.channelName {
+    margin-left: 1em;
 }
