@@ -32,7 +32,7 @@ def sendJsonDislikes(request):
     dislikes = list(VideoDislike.objects.all().values('video', 'user'))
     return JsonResponse({'dislikes': dislikes})
 
-    
+
 def JsonResponseVideos(request):
     videos = list(Video_Upload.objects.all().values('user', 'video', 'title', 'description', 'created_at'))
     return JsonResponse({'videos': videos})
@@ -154,9 +154,20 @@ def video_detail(request, pk):
             
             comment = Comment(content=content, created_at=created_at, user=request.user, video=video)
             comment.save()
-    
+
+    else:
+        
+        likes = VideoLike.objects.filter(video=video)
+        dislikes = VideoDislike.objects.filter(video=video)
+
+        
+        numberOfDislikes = dislikes.all().count()
+        
+        numberOfLikes = likes.all().count()
+        
+
     videos = Video_Upload.objects.all()[:5]
-    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos})
+    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes})
 
 
 @csrf_exempt

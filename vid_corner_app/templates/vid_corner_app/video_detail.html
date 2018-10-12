@@ -10,22 +10,28 @@
 <video width="700px" controls>
     <source src="{{video.video.url}}">
 </video>
+<section class='titleAndRatings'>
 <h2 class='videoTitle'>{{ video.title }}</h2>
-<h1>{{video.id}}</h1>
+<section class='likesAndDislikes'>
 <form class="likeForm" method="POST" enctype="multipart/form-data" novalidate>
 {% csrf_token %}
 <input class='user' type='hidden' name='user' value={{request.user.id}}>
 <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
 <button type='submit' class='videoLike'><i class="far fa-thumbs-up"></i></button>
+<h4>{{numberOfLikes}}</h4>
 </form>
 <form class="dislikeForm" method="POST" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     <input class='user' type='hidden' name='user' value={{request.user.id}}>
     <input type='hidden' class='videoId' name='videoId' value={{video.id}}>
     <button type='submit' class='videoDislike'><i class="far fa-thumbs-down"></i></button>
+    <h4>{{numberOfDislikes}}</h4>
 </form>
+</section>
+</section>
 
 <h4>{{ video.description }}</h4>
+
 
 <section class=commentSection>
     {% if user.is_authenticated %}
