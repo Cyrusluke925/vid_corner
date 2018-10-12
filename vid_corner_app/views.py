@@ -192,7 +192,8 @@ def subscribe(request, pk):
     print('LINE 189 *************************************************************')
     if Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id).exists():
         print('This Exists')
-        return HttpResponse('This Exists')
+        subscribe = [];
+        return JsonResponse({'subscribe': subscribe})
     else:
         print('LINE 193**********************************************************')
         if request.method == 'POST':
@@ -200,7 +201,7 @@ def subscribe(request, pk):
             subscribe = Subscribe(subscriber_to=subscriber_to, subscriber_from=request.user)
             print('**************** YOU MADE IT THIS FAR ***************')
             subscribe.save()
-            return JsonResponse({'message': f'{request.user.username} followed the user with the id of {pk}'})
+            return JsonResponse({'subscribe': subscribe})
 
 
 @login_required
@@ -258,7 +259,7 @@ def video_dislike(request, pk):
             print(dislikes)
             return JsonResponse({'dislikes': dislikes})
 
-
+@login_required
 @csrf_exempt
 def video_like_delete(request, pk):
     print('so you are deleting your like now')
@@ -267,6 +268,8 @@ def video_like_delete(request, pk):
         video_like.delete()
     return HttpResponse('like deleted')
 
+
+@login_required
 @csrf_exempt
 def video_dislike_delete(request, pk):
     print('you entered the delete dislike function')
@@ -276,4 +279,12 @@ def video_dislike_delete(request, pk):
     return HttpResponse('dislike object deleted')
 
 
-        
+
+
+@csrf_exempt
+def subscription_delete(request, pk):
+    print('YOU ARE DELETING YOUR SUBSCRIPTION NOW')
+    if request.method == 'DELETE':
+        subscription = Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id)
+        subscription.delete()
+    return HttpResponse('subscription deleted')

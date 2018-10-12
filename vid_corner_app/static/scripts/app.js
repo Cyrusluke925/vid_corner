@@ -248,6 +248,7 @@ $('.commentForm').on('submit', function(e) {
 
 $('.subscribeForm').on('submit', function(e) {
     e.preventDefault()
+    // $('.subscribeButton').text('SUBSCRIBED')
 
 let form = $('.subscribeForm').serialize()
 let subscriber_from = $('.theSubscriberId').attr('value')
@@ -259,64 +260,29 @@ let subscriberData = {
     subscriber_to: subscriber_to
 }
 
-    $.ajax({
+let deleteEndpoint = `http://localhost:8000/user/${subscriber_to}/subscription/delete`
+    
+$.ajax({
         method: 'POST',
         url: `http://localhost:8000/user/${subscriber_to}/subscribe`,
         data: subscriberData,
         success: function onSuccess(response) {
-            console.log(response)
-        }
-    })
-
-})
-
-
-$('.videoLike').on('click', function(e) {
-    e.preventDefault()
-    var form = $('.likeForm').serialize()
-    var videoId = $('.videoId').attr('value')
-    var user = $('.user').attr('value')
-    
-    var theScoop = {
-        form: form,
-        videoId: videoId,
-        user: user
-    }
-
-    var likeEndpoint = `http://localhost:8000/video/${videoId}/like`
-
-    var deleteEndpoint = `http://localhost:8000/video/${videoId}/like/delete`
-
-    $.ajax({
-        method: "POST",
-        url: likeEndpoint,
-        data: theScoop,
-        success: function likeSucess(json) {
-            // console.log(json)
-            if(json.likes.length !== 0) {
-                var value = parseInt($('.likeCounter').text())
-                $('.likeCounter').text(value + 1)
-                $('.videoLike').addClass('likeColor')
-            }
-            
-            else if (json.likes.length === 0) {
-                
+            if (response.subscribe.length === 0) {
                 $.ajax({
                     method: "DELETE",
                     url: deleteEndpoint,
-                    data: theScoop,
-                    success: function deleteSuccess(response) {
+                    data: subscriberData,
+                    success: function deleteSuccess(deleteResponse) {
+                        console.log(deleteResponse)
+                        console.log('success')
                         
-                        $('.videoLike').removeClass('likeColor')
                         
-                        var value = parseInt($('.likeCounter').text())
-                        $('.likeCounter').text(value - 1)
-                        
-                        // console.log('already liked so deleting')
                     }
                 })
+
             }
-            
         }
     })
+
 })
+
