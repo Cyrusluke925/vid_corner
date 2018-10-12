@@ -112,9 +112,10 @@ $('.videoLike').on('click', function(e) {
         url: likeEndpoint,
         data: theScoop,
         success: function likeSucess(json) {
-            console.log(json)
+            // console.log(json)
             if(json.likes.length !== 0) {
-                $('.likeCounter').text(parseInt($('.likeCounter').attr('data-id')) + 1)
+                var value = parseInt($('.likeCounter').text())
+                $('.likeCounter').text(value + 1)
                 $('.videoLike').addClass('likeColor')
             }
             
@@ -127,8 +128,11 @@ $('.videoLike').on('click', function(e) {
                     success: function deleteSuccess(response) {
                         
                         $('.videoLike').removeClass('likeColor')
-                        $('.likeCounter').text(parseInt($('.likeCounter').attr('data-id')))
-                        console.log('already liked so deleting')
+                        
+                        var value = parseInt($('.likeCounter').text())
+                        $('.likeCounter').text(value - 1)
+                        
+                        // console.log('already liked so deleting')
                     }
                 })
             }
@@ -167,7 +171,9 @@ $.ajax({
 
         if (json.dislikes.length !== 0) {
             $('.videoDislike').addClass('likeColor')
-            $('.dislikeCounter').text(parseInt($('.dislikeCounter').attr('data-id')) - 1)
+            var value = parseInt($('.dislikeCounter').text())
+            $('.dislikeCounter').text(value + 1) 
+            
             
         }
         else if (json.dislikes.length === 0) {
@@ -178,7 +184,10 @@ $.ajax({
                 data: dislikeInfo,
                 success: function deleteSuccess(response) {
                     $('.videoDislike').removeClass('likeColor')
-                    $('.dislikeCounter').text(parseInt($('.dislikeCounter').attr('data-id')))
+                    var value = parseInt($('.dislikeCounter').text())
+                        $('.dislikeCounter').text(value - 1)
+                    
+                    
                     console.log('already disliked so deleting dislike')
                 }
             })
