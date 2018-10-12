@@ -1,9 +1,55 @@
 
 
 
+let dislikeVidId;
+let dislikeApiUserId;
+let likevidId;
+let likeApiUserId;
+let videoId = $('.videoId').attr('value');
+let currentUserId = $('.user').attr('value');
+
+
+$.ajax({
+    method: 'GET',
+    url: `http://localhost:8000/api/likes`,
+    async: false,
+    success: function onSucess(response) {
+        response.likes.forEach(function(like) {
+            likevidId = like.video
+            likeApiUserId = like.user
+    
+                
+            
+        })
+    }
+})
 
 
 
+
+if ( videoId == likevidId && currentUserId == likeApiUserId) {
+    
+    $('.videoLike').addClass('likeColor')
+} 
+
+
+$.ajax({
+    method: 'GET',
+    url: 'http://localhost:8000/api/dislikes',
+    async: false,
+    success: function dislikeOnSucess(response) {
+        console.log(response)
+        response.dislikes.forEach(function(dislike) {
+            dislikeVidId = dislike.video
+            dislikeApiUserId = dislike.user
+        })
+    }
+})
+
+if ( videoId == dislikeVidId && currentUserId == dislikeApiUserId) {
+    
+    $('.videoDislike').addClass('likeColor')
+} 
 
 $('.videoLike').on('click', function(e) {
     e.preventDefault()
@@ -69,7 +115,7 @@ $('.videoDislike').on('click', function(e) {
     var deleteEndpoint = `http://localhost:8000/video/${videoId}/dislike/delete`
     e.preventDefault()
 
-
+   
 $.ajax({
     method: "POST",
     url: dislikeEndpoint,
@@ -94,5 +140,6 @@ $.ajax({
     },
 })
 
-})
+});
+
 
