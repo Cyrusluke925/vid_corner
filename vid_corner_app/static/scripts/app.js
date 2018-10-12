@@ -17,7 +17,12 @@ $.ajax({
         response.likes.forEach(function(like) {
             likevidId = like.video
             likeApiUserId = like.user
+            if ( videoId == likevidId && currentUserId == likeApiUserId) {
     
+                $('.videoLike').addClass('likeColor')
+            } else {
+                console.log('nope for likes')
+            }
                 
             
         })
@@ -27,10 +32,8 @@ $.ajax({
 
 
 
-if ( videoId == likevidId && currentUserId == likeApiUserId) {
-    
-    $('.videoLike').addClass('likeColor')
-} 
+
+
 
 
 $.ajax({
@@ -42,14 +45,20 @@ $.ajax({
         response.dislikes.forEach(function(dislike) {
             dislikeVidId = dislike.video
             dislikeApiUserId = dislike.user
+            if ( videoId == dislikeVidId && currentUserId == dislikeApiUserId) {
+    
+                $('.videoDislike').addClass('likeColor')
+            } else {
+                console.log('nope for dislikes')
+            }
         })
     }
 })
 
-if ( videoId == dislikeVidId && currentUserId == dislikeApiUserId) {
-    
-    $('.videoDislike').addClass('likeColor')
-} 
+
+
+
+
 
 $('.videoLike').on('click', function(e) {
     e.preventDefault()
