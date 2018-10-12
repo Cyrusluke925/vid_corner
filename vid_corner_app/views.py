@@ -23,6 +23,16 @@ def index(request):
     return render(request, 'vid_corner_app/index.html')
 
 
+def sendJsonLikes(request):
+    likes = list(VideoLike.objects.all().values('video', 'user'))
+    return JsonResponse({'likes': likes})
+
+
+def sendJsonDislikes(request):
+    dislikes = list(VideoDislike.objects.all().values('video', 'user'))
+    return JsonResponse({'dislikes': dislikes})
+
+    
 def JsonResponseVideos(request):
     videos = list(Video_Upload.objects.all().values('user', 'video', 'title', 'description', 'created_at'))
     return JsonResponse({'videos': videos})
