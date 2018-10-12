@@ -41,3 +41,8 @@ aside {
     display: flex;
     justify-content: space-between;
 }
+
+
+.views {
+    color: grey;
+}

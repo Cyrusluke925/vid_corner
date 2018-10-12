@@ -8,7 +8,7 @@
 
 
 <div class="singleVideo">
-<a href="{% url 'video_detail' pk=video.pk %}"><video width= 300px>
+<a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=video.pk %}"><video width= 300px>
     <source src='{{video.video.url}}' >
 </video></a>
 <h4>{{video.title}}</h4>

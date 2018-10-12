@@ -145,6 +145,8 @@ def home(request):
 
 def video_detail(request, pk):
     video = Video_Upload.objects.get(id=pk)
+    views = video.views = video.views + 1
+    video.save()
     if request.method == 'POST':
     
         form = CommentForm(request.POST)
@@ -156,7 +158,7 @@ def video_detail(request, pk):
             comment.save()
 
 
-        
+    
     likes = VideoLike.objects.filter(video=video)
     dislikes = VideoDislike.objects.filter(video=video)
 
