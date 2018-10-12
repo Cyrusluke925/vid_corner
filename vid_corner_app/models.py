@@ -55,4 +55,11 @@ class VideoDislike(models.Model):
     def __str__(self):
         return self.user.username
     
-    
+
+
+class Subscribe(models.Model):
+    subscriber_from = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriber_from')
+    subscriber_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriber_to')
+
+    def __str__(self):
+        return self.subscriber_from.username
