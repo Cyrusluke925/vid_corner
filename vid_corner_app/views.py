@@ -194,8 +194,10 @@ def video_dislike(request, pk):
 
             print('disliking noww')
             dislike.save()
-            # likes = list(VideoLike.objects.filter(video=pk).values('video', 'user'))
-    return HttpResponse('disliked')
+
+            dislikes = list(VideoDislike.objects.filter(video=pk).values('video', 'user'))
+            print(dislikes)
+            return JsonResponse({'dislikes': dislikes})
 
 
 @csrf_exempt

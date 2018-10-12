@@ -1,5 +1,6 @@
 $('.videoLike').on('click', function(e) {
     e.preventDefault()
+    
     var form = $('.likeForm').serialize()
     var videoId = $('.videoId').attr('value')
     var user = $('.user').attr('value')
@@ -19,12 +20,20 @@ $('.videoLike').on('click', function(e) {
         url: likeEndpoint,
         data: theScoop,
         success: function likeSucess(json) {
-            if (json.likes.length === 0) {
+            console.log(json)
+            if(json.likes.length !== 0) {
+                $('.videoLike').addClass('likeColor')
+            }
+            
+            else if (json.likes.length === 0) {
+                
                 $.ajax({
                     method: "DELETE",
                     url: deleteEndpoint,
                     data: theScoop,
                     success: function deleteSuccess(response) {
+                        
+                        $('.videoLike').removeClass('likeColor')
                         console.log('already liked so deleting')
                     }
                 })
@@ -59,13 +68,18 @@ $.ajax({
     url: dislikeEndpoint,
     data: dislikeInfo,
     success: function dislikeSuccess(json) {
-
-        if (json.dislikes.length === 0) {
+        console.log(json)
+        if (json.dislikes.length !== 0) {
+            $('.videoDislike').addClass('likeColor')
+        }
+        else if (json.dislikes.length === 0) {
+            $('.videoDislike').removeClass('likeColor')
             $.ajax({
                 method: "DELETE",
                 url: deleteEndpoint,
                 data: dislikeInfo,
                 success: function deleteSuccess(response) {
+                    $('.videoDislike').removeClass('likeColor')
                     console.log('already disliked so deleting dislike')
                 }
             })
