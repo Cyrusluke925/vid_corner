@@ -80,7 +80,7 @@
 </section>
 </div>
 <aside>
-    <h1>HELLOOO</h1>
+    <h3>Suggested For You</h3>
     {% for video in videos %}
     <a href="{% url 'video_detail' pk=video.pk %}"><video width="200px">
             <source src="{{video.video.url}}"></a>

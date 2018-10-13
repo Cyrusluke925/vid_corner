@@ -30,6 +30,30 @@ $.ajax({
 })
 
 
+// Global Variables
+var menuButton = document.querySelector('i');
+
+// Menu Click Event Listener
+menuButton.addEventListener('click', handleMenuClick);
+
+// Handle Menu Click
+function handleMenuClick () {
+	// console.log('Click!');
+	var sidebar = document.querySelector('.sidebar');
+
+	if (sidebar.classList.contains('sidebar-hidden')) {
+		sidebar.classList.toggle('sidebar-hidden');
+		menuButton.style.color = '#fff';
+		menuButton.classList
+			.remove('fa-bars')
+			.add('fa-times');
+	} else {
+		sidebar.classList.toggle('sidebar-hidden');
+		menuButton.style.color = '#000';
+		menuButton.classList.remove('fa-times');
+		menuButton.classList.add('fa-bars');
+	}
+}
 
 $.ajax({
     method: 'GET',
@@ -316,3 +340,14 @@ $.ajax({
 
 })
 
+
+
+
+
+
+
+
+$('.hamburger').on('click', function showSidebar(e) {
+    e.preventDefault()
+    $('.sideBar').toggleClass('sideBarShow')
+})

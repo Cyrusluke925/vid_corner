@@ -38,7 +38,17 @@ ul.nav.nav-pills {
 }
 
 .commentBox {
+    font-family: Roboto;
+    color: #000000;
     width: 100%;
+    box-shadow: none;
+    
+    
+}
+
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 .commentButton {
@@ -107,7 +117,7 @@ video {
 }
 
 .videoAndComments {
-    max-width: 750px;
+    
 }
 
 .pictureAndChannelName {
@@ -142,23 +152,26 @@ video {
 
 .profilePicture {
     margin-left: 3em;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .profilePic {
     border-radius:50%;
-    height: 120px;
-    width:120px;
+    height: 100px;
+    width:100px;
     object-fit:cover;
 }
 
 .picNameSubscribe {
     display: flex;
     justify-content: space-between;
+    height:120px;
+    background-color: #FAFAFA
 
 }
 
 .profilePicAndInfo {
+    margin-left: 8em;
     display: flex;
 }
 
@@ -169,7 +182,7 @@ video {
 
 .userSubscribe {
     margin-right: 8em;
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 .subscribeButton {
@@ -204,4 +217,101 @@ video {
     width: 150.359px;
     padding: 7px 16px 10px 16px;
 
+}
+
+
+
+
+
+
+
+
+.fa-youtube {
+    margin-top: 1.5em;
+}
+
+
+.mainLinks {
+    margin-top: 4em;
+}
+.list-item {
+    list-style-type: none;
+    margin-left: 2em;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.navSearch {
+    width: 100%;
+}
+
+.asideHamburger {
+    width: 100%;
+    margin-left: 2em;
+    display: flex;
+}
+
+
+
+.hamburger {
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+
+.siteTitle {
+    margin-left: 0.5em;
+    margin-top: 1em;
+}
+
+.currentPage {
+    display: flex;
+}
+
+
+
+aside {
+    display: none;
+    
+}
+
+
+.sideBarShow {
+    display:block;
+    width: 240px;
+    border-top: 1px solid lightgrey;
+    background-color: #FAFAFA
+}
+
+.listItemContainer {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+}
+
+.fa-thumbs-up {
+    margin-top: 0.2em;
+
+}
+
+.fa-home {
+    margin-top: 0.2em;
+}
+
+
+.fa-rss-square {
+    margin-top: 0.2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navList {
+    padding-left: 0;
+}
+
+.listItemContainer:hover {
+    background-color: lightgrey;
 }
