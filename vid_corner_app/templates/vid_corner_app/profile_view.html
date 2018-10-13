@@ -21,7 +21,7 @@
         <div class='userSubscribe'>
                 <form class='subscribeForm' method='POST' enctype="multipart/form-data" novalidate>
                     <input type='hidden' class='theSubscriberId' value={{request.user.id}}>
-                    <input type='hidden' class='theSubscribeeId' value={{video.user.id}}>
+                    <input type='hidden' class='theSubscribeeId' value={{user.id}}>
                     <button type='submit' class='subscribeButton'>subscribe</button>
                 </form>
         </div>
