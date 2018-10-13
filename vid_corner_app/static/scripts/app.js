@@ -7,7 +7,7 @@ let likevidId;
 let likeApiUserId;
 let videoId = $('.videoId').attr('value');
 let currentUserId = $('.user').attr('value');
-
+let theSubscribeeId = $('.theSubscribeeId').attr('value')
 
 $.ajax({
     method: 'GET',
@@ -22,6 +22,28 @@ $.ajax({
                 $('.videoLike').addClass('likeColor')
             } else {
                 console.log('nope for likes')
+            }
+                
+            
+        })
+    }
+})
+
+
+
+$.ajax({
+    method: 'GET',
+    url: `http://localhost:8000/api/subscriptions`,
+    async: false,
+    success: function onSucess(response) {
+        response.subscriptions.forEach(function(subscription) {
+            subscriber_from = subscription.subscriber_from
+            subscriber_to = subscription.subscriber_to
+            if ( subscriber_from == currentUserId && subscriber_to == theSubscribeeId) {
+    
+                $('.subscribeButton').text('SUBSCRIBED')
+            } else {
+                console.log('nope for subscribes')
             }
                 
             
@@ -248,7 +270,7 @@ $('.commentForm').on('submit', function(e) {
 
 $('.subscribeForm').on('submit', function(e) {
     e.preventDefault()
-    // $('.subscribeButton').text('SUBSCRIBED')
+    
 
 let form = $('.subscribeForm').serialize()
 let subscriber_from = $('.theSubscriberId').attr('value')
@@ -267,20 +289,27 @@ $.ajax({
         url: `http://localhost:8000/user/${subscriber_to}/subscribe`,
         data: subscriberData,
         success: function onSuccess(response) {
+            console.log(response)
             if (response.subscribe.length === 0) {
                 $.ajax({
                     method: "DELETE",
                     url: deleteEndpoint,
                     data: subscriberData,
                     success: function deleteSuccess(deleteResponse) {
-                        console.log(deleteResponse)
-                        console.log('success')
+                        $('.subscribeButton').text('SUBSCRIBE')
                         
                         
-                    }
+                    },
+                    
                 })
 
+            } else {
+                
             }
+        },
+        error: function onError(err1, err2, err3) {
+            console.log('errorred')
+            $('.subscribeButton').text('SUBSCRIBED')
         }
     })
 

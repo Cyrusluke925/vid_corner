@@ -187,21 +187,22 @@ def video_detail(request, pk):
 @csrf_exempt
 @login_required
 def subscribe(request, pk):
-    print('ENTERED THE SUBSCRIBER FUNCTION*************************************')
+
     subscriber_to = User.objects.get(id=pk)
-    print('LINE 189 *************************************************************')
-    if Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id).exists():
+
+    if Subscribe.objects.filter(subscriber_to=subscriber_to, subscriber_from=request.user.id).exists():
         print('This Exists')
         subscribe = [];
         return JsonResponse({'subscribe': subscribe})
     else:
-        print('LINE 193**********************************************************')
+
         if request.method == 'POST':
-            print('******************  METHOD IS A POST   *************************')
+
             subscribe = Subscribe(subscriber_to=subscriber_to, subscriber_from=request.user)
             print('**************** YOU MADE IT THIS FAR ***************')
             subscribe.save()
-            return JsonResponse({'subscribe': subscribe})
+            
+            return JsonResponse({'subscribe':subscribe})
 
 
 @login_required
@@ -258,6 +259,8 @@ def video_dislike(request, pk):
             dislikes = list(VideoDislike.objects.filter(video=pk).values('video', 'user'))
             print(dislikes)
             return JsonResponse({'dislikes': dislikes})
+
+
 
 @login_required
 @csrf_exempt
