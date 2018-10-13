@@ -1,0 +1,62 @@
+{% extends 'vid_corner_app/base.html' %}
+
+{% block profile_view %}
+<body>
+<div class ="profile_container">
+    <div class="profile_header_info">
+        <div class ="headerPicture" style="background-image: url('{{ user.profile.header_picture.url}}')">
+                <!-- <img class ='headerPic' src='{{ user.profile.header_picture.url }}'> -->
+        </div>
+        <div class='picNameSubscribe'>
+            <div class='profilePicAndInfo'>
+            <div class='profilePicture'>
+                <img class='profilePic' src='{{ user.profile.profile_picture.url }}' width="auto" height="250px" alt="">
+            </div>
+            <div class='nameAndSubscriberCount'>
+                <h3 class='profileName'>{{user.profile.channel_name }}</h3>
+                <h6 class='views'>Subscriber count will go here</h6>
+            </div>
+            </div>
+        
+        <div class='userSubscribe'>
+                <form class='subscribeForm' method='POST' enctype="multipart/form-data" novalidate>
+                    <input type='hidden' class='theSubscriberId' value={{request.user.id}}>
+                    <input type='hidden' class='theSubscribeeId' value={{video.user.id}}>
+                    <button type='submit' class='subscribeButton'>subscribe</button>
+                </form>
+        </div>
+        </div>
+        <!-- <div class= "not_username">
+            <div class="profile_pic_block">
+                <img src="{{ user.profile.profile_picture.url }}" width="auto" height="250px" alt="">
+                <img src='{{ user.profile.header_picture.url }}'>
+            </div>
+            <div class ="profile_text_block">
+                <a href = "#">Edit Profile</a>
+                <p><strong>Channel Name:</strong> {{ user.profile.channel_name }}</p>
+                <p><strong>About:</strong> {{ user.profile.about }}</p>
+            </div> 
+        </div>  
+    </div>
+    <div class="profile_posts_container">
+        <div class = "profile_posts_header">
+            <h1> Posts by {{user.username}} </h1>
+        </div>
+        <div class="profile_posts">
+        </div> 
+    </div> -->
+    </div>
+</div>    
+</body>
+{% endblock %}
+
+
+
+
+
+
+<!-- channel_name = models.CharField(max_length=70)
+about = models.TextField(blank=True, null=True)
+profile_picture = models.ImageField(blank=True, upload_to=settings.MEDIA_ROOT, null=True, default=settings.MEDIA_ROOT+'/defaultprofile.jpg')
+header_picture = models.ImageField(blank=True, upload_to=settings.MEDIA_ROOT, null=True, default=settings.MEDIA_ROOT+'/defaultheader.jpg')
+user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') -->

@@ -40,7 +40,7 @@ $.ajax({
             subscriber_from = subscription.subscriber_from
             subscriber_to = subscription.subscriber_to
             if ( subscriber_from == currentUserId && subscriber_to == theSubscribeeId) {
-    
+                $('.subscribeButton').toggleClass('subscribed')
                 $('.subscribeButton').text('SUBSCRIBED')
             } else {
                 console.log('nope for subscribes')
@@ -296,7 +296,8 @@ $.ajax({
                     url: deleteEndpoint,
                     data: subscriberData,
                     success: function deleteSuccess(deleteResponse) {
-                        $('.subscribeButton').text('SUBSCRIBE')
+                        $('.subscribeButton').removeClass('subscribed')
+                        $('.subscribeButton').text('subscribe')
                         
                         
                     },
@@ -308,8 +309,8 @@ $.ajax({
             }
         },
         error: function onError(err1, err2, err3) {
-            console.log('errorred')
-            $('.subscribeButton').text('SUBSCRIBED')
+            $('.subscribeButton').addClass('subscribed')
+            $('.subscribeButton').text('subscribed')
         }
     })
 

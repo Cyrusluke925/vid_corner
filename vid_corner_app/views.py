@@ -105,7 +105,7 @@ def profile_create(request):
             print(request.POST)
             print(request.FILES)
 
-            return render(request, 'vid_corner_app/home.html')
+            return render(request, 'vid_corner_app/profile_view.html')
         else: 
             print(form.errors)
             return render(request, 'vid_corner_app/profile_create.html', {'form': form})
@@ -115,6 +115,10 @@ def profile_create(request):
 
     return render(request, 'vid_corner_app/profile_create.html', {'form': form})
 
+def profile_view(request):
+    user = request.user
+    videos = Video_Upload.objects.filter(user = request.user)
+    return render(request, 'vid_corner_app/profile_view.html', {'user': user ,'videos': videos})
 
 
 @login_required
