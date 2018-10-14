@@ -7,9 +7,11 @@
 <div class='entirePage'>
 
 <div class='videoAndComments'>
+<!-- <div class ='videoContainer'> -->
 <video controls>
     <source src="{{video.video.url}}">
 </video>
+    <!-- </div> -->
 <section class='titleAndRatings'>
 <section class='titleAndViews'>
 <h2 class='videoTitle'>{{ video.title }}</h2>
@@ -79,14 +81,25 @@
     </div>
 </section>
 </div>
-<aside>
+<div class='aside'>
     <h3>Suggested For You</h3>
     {% for video in videos %}
-    <a href="{% url 'video_detail' pk=video.pk %}"><video width="200px">
-            <source src="{{video.video.url}}"></a>
+    <div class='otherVideos'>
+    <a class='suggested' href="{% url 'video_detail' pk=video.pk %}">
+    <div class='videoThumbnail'>
+    <video width="200px" height='180px'>
+            <source src="{{video.video.url}}">
         </video>
+    </div>
+    <div class='suggestedVideoInfo'>
+        <h5 class='suggestedVidInfo'>{{video.title}}</h5>
+        <p class='suggestedVidInfo'>{{video.user.profile.channel_name}}</p>
+        <h6 class='suggestedVidInfo'>{{video.views}} views</h6>
+        </div>
+    </a>
+</div>
         
     {% endfor %}
-</aside>
+    </div>
 </div>
 {% endblock %}

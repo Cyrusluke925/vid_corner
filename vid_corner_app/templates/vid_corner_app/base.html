@@ -32,6 +32,7 @@
   <body>
 
     <header>
+        <nav>
       {% if user.is_authenticated %}
       <ul class="nav nav-pills">
           ...
@@ -45,8 +46,8 @@
           </li>
           
           <form class='navSearch' method="GET">
-              <input type='text' placeholder="search">
-              <button type='submit'>Search</button>
+              <input class='searchBar' type='text' placeholder="search">
+              <button class='searchButton' type='submit'><i class="fas fa-search"></i></button>
           </form>
           <div class='asideHamburger'>
           <li class='hamburger'><a  href=''><i class="fas fa-bars"></i></a></li>
@@ -68,6 +69,7 @@
             </form>
             
         </ul>
+    </nav>
 
         
         
