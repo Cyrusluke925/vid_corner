@@ -76,9 +76,11 @@ ul.nav.nav-pills {
 
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus, button:focus{
     outline: none;
 }
+
+
 
 .commentButton {
     float: right;
@@ -116,6 +118,12 @@ aside {
     padding-top: 1em;
 }
 
+
+.user_profile_image {
+    width:40px;
+    border-radius: 50%;
+    object-fit:cover;
+}
 .user_profile_picture {
     width:55px;
     height: 50px;
@@ -247,7 +255,19 @@ video {
 }
 
 
+li {
+    list-style-type: none;
+}
 
+
+
+.commentAndUser {
+    display: flex;
+}
+
+.comment {
+    margin-left: 1em;
+}
 
 
 
@@ -262,7 +282,7 @@ video {
     margin-top: 4em;
 }
 .list-item {
-    list-style-type: none;
+    
     margin-left: 2em;
     font-size: 1.2em;
     text-decoration: none;
@@ -386,14 +406,18 @@ nav {
 
 h5.suggestedVidInfo {
     font-size: 15px;
+    color: black;
 }
 
 p.suggestedVidInfo {
     font-size: 10px;
+    color: grey;
 }
 
 h6.suggestedVidInfo {
     font-weight: 300;
+    color: grey ;
+
 }
 
 

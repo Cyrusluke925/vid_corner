@@ -67,17 +67,24 @@
     </form>
     {% endif %}
     <div class='theComments'>
-        {% for comment in video.comments.all %}
         <ul class='commentList'>
+        {% for comment in video.comments.all %}
+
             <li class='commentAndUser'>
+                <div class='commenterPic'>
+                <img src={{comment.user.profile.profile_picture.url}} height='40px' width='auto' class='user_profile_image'>
+                </div>
                 <div class='comment'>
-                    <p class='theUser' data-id='{{comment.user}}'>{{comment.user}}</p>
+                    <h5 class='theUser' data-id='{{comment.user}}'>{{comment.user}}</h5>
                     <p class='theComment'>{{comment.content}}</p>
                 </div>
+
             </li>
 
-        </ul>
+
+    
         {% endfor %}
+        </ul>
     </div>
 </section>
 </div>
