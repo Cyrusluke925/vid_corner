@@ -2,7 +2,9 @@
 {% load staticfiles %}
 
 {% block home %}
-
+<div class='homePage'>
+<h2>Recent Uploads</h2>
+<div class='theVideos'>
 {% for video in videos %}
 
 
@@ -12,8 +14,11 @@
     <source src='{{video.video.url}}' >
 </video></a>
 <h4>{{video.title}}</h4>
+<p class='suggestedVidInfo'>{{video.user.profile.channel_name}}</p>
+<h6 class='suggestedVidInfo'>{{video.views}} views</h6>
 </div>
 {% endfor %}
-
+</div>
+</div>
 
 {% endblock %}

@@ -62,6 +62,7 @@
         <input class='user' type='hidden' name='user' value={{request.user.id}}>
         <input type='hidden' class='videoId' name='videoId' value={{video.id}}> 
         <input type='hidden' class='username' name='username' value='{{request.user.username}}'>
+        <input type='hidden' class='commentUserPicture' value='{{request.user.profile.profile_picture.url}}'>
         <input class='commentBox' type='text' name='content' placeholder='Add a public comment...'>
         <button class='commentButton' type="submit">SUBMIT</button>
     </form>

@@ -35,7 +35,7 @@
         <nav>
       {% if user.is_authenticated %}
       <ul class="nav nav-pills">
-          ...
+          
           <li role="presentation" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="{{request.user.profile.profile_picture.url}}" class='user_profile_image' width="auto" height="40px">
@@ -120,19 +120,12 @@
     </div>
   
     <main>
-        <!-- <div class="sidebar sidebar-hidden">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#">Home</a></li>
-                    <li class="nav-item"><a href="#">Products</a></li>
-                    <li class="nav-item"><a href="#">About</a></li>
-                    <li class="nav-item"><a href="#">Contact</a></li>
-                </ul>
-            </div> -->
+
     <div class='currentPage'>
         <aside class='sideBar'>
             <div class='mainLinks'>
                 <ul class="navList">
-                        <a class='asideLink' href='#'>
+                        <a class='asideLink' href="{% url 'home' %}">
                         <div class='listItemContainer'>
                         <i  class="fas fa-home" ></i>
                         <li class="list-item">Home</li>
@@ -149,6 +142,9 @@
                         </div>
                     </a>
                     </ul>
+            </div>
+            <div class='channelsSubscribed'>
+                
             </div>
         </aside>
     {% block content %}

@@ -258,15 +258,20 @@ $('.commentForm').on('submit', function(e) {
     var videoId = $('.videoId').attr('value')
     var user = $('.user').attr('value')
     var username = $('.username').attr('value')
+    var commentUserPicture = $('.commentUserPicture').attr('value');
 
 
+    $('.theComments').prepend(`<ul class='commentList'><li class='commentAndUser'>
+    <div class='commenterPic'>
+    <img src='${commentUserPicture}' height='40px' width='auto' class='user_profile_image'>
+    </div>
+    <div class='comment'>
+        <h5 class='theUser' data-id='${user}'>${username}</h5>
+        <p class='theComment'>${commentContent}</p>
+    </div>
+    
 
-    $('.theComments').prepend(`<ul class='commentList'>
-    <li class='commentAndUser'>
-        <div class='comment'>
-            <p class='theUser' data-id='${user}'>${username}</p>
-            <p class='theComment'>${commentContent}</p>
-        </div>`)
+</li></ul>`)
 
 
         var commentData = {

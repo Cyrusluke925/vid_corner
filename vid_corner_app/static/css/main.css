@@ -53,12 +53,20 @@ ul.nav.nav-pills {
    
 }
 
+.homePage {
+    display: flex;
+    margin: 1em 3em;
+    flex-direction: column;
+}
 
 .aside {
     width: 400px;
     height: 100vh;
     margin-left: 6em;
+
 }
+
+
 
 
 .commentBox {
@@ -69,6 +77,9 @@ ul.nav.nav-pills {
     
     
 }
+
+
+
 
 .videoContainer {
     width: 1206px;
@@ -154,6 +165,10 @@ video {
 }
 
 
+div.singleVideo {
+    width: 200px;
+}
+
 
 .pictureAndChannelName {
     display: flex;
@@ -218,6 +233,10 @@ video {
 .userSubscribe {
     margin-right: 8em;
     margin-top: 3em;
+}
+
+.theVideos {
+    display: flex;
 }
 
 .subscribeButton {
@@ -326,7 +345,14 @@ aside {
     display:block;
     width: 240px;
     border-top: 1px solid lightgrey;
-    background-color: #FAFAFA
+    background-color: #FAFAFA;
+    
+}
+
+
+aside.sideBar.sideBarShow {
+    height: 100vh;
+    padding-right: 2em;
 }
 
 .listItemContainer {
@@ -442,4 +468,9 @@ h6.suggestedVidInfo {
 
 a {
     text-decoration: none !important;
+}
+
+
+.profile_container {
+    width: 100%;
 }
