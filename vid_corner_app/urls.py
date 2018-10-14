@@ -23,6 +23,7 @@ urlpatterns=[
     path('video/<int:pk>/dislike/delete', views.video_dislike_delete, name='video_dislike_delete'),
     path('user/<int:pk>/subscribe', views.subscribe, name="subscribe"),
     path('user/<int:pk>/subscription/delete', views.subscription_delete, name='subscription_delete'),
+    path('likes', views.view_likes, name='view_likes'),
 
     
 

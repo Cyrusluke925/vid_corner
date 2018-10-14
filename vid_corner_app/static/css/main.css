@@ -2,6 +2,7 @@
 body {
     width: 100%;
     height: 100%;
+    
 }
 main {
     background-color: #FAFAFA
@@ -116,12 +117,54 @@ aside {
 }
 
 
+/* ***************************************************************************** */
+/* *********************           LIKES PAGE *********************************** */
+/* ***************************************************************************** */
+.likedVideo {
+    width: 200px;
+
+}
+
+.likeContainer {
+    display: flex;
+}
+
+.likedVideoInformation {
+    margin-left: 2em;
+}
 .views {
     color: grey;
     font-weight: 400;
     font-size: 1.05em;
 
 }
+
+.viewLikesContainer {
+    background-color: #fefefe;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10em;
+}
+
+.likeContainer {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.likeList {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
 
 .video_uploader {
     display: flex;
@@ -149,6 +192,8 @@ aside {
 
 .currentPage {
     max-width: 100%;
+    background-color: #FEFEFE;
+
 
 
 }

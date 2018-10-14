@@ -295,3 +295,15 @@ def subscription_delete(request, pk):
         subscription = Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id)
         subscription.delete()
     return HttpResponse('subscription deleted')
+
+
+
+def view_likes(request):
+    the_likes = list(VideoLike.objects.all())
+    like_list = []
+    for like in the_likes:
+        if like in the_likes:
+            if like.user == request.user:
+                like_list.append(like)
+    
+    return render(request, 'vid_corner_app/view_likes.html', {'like_list': like_list})

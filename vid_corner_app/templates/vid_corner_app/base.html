@@ -135,7 +135,7 @@
                         <i  class="fas fa-rss-square" ></i>
                         <li class="list-item">Subscriptions</li>
                         </div></a>
-                        <a class='asideLink' href='#'>
+                        <a class='asideLink' href="{% url 'view_likes' %}">
                         <div class='listItemContainer'>
                         <i  class="far fa-thumbs-up"></i>
                         <li class="list-item">Liked Videos</li>
@@ -144,7 +144,7 @@
                     </ul>
             </div>
             <div class='channelsSubscribed'>
-                
+
             </div>
         </aside>
     {% block content %}
@@ -156,6 +156,8 @@
     {% block video_detail %}
     {% endblock %}
     {% block profile_view %}
+    {% endblock %}
+    {% block view_likes %}
     {% endblock %}
     </div>
     </main>
