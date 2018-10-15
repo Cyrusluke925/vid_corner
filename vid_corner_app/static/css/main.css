@@ -554,3 +554,22 @@ a {
 .channelsSubscribed {
     width: 100%;
 }
+/* ******************************************************************************************************************************* */
+
+
+/* ****************************************** NOTIFICATIONS ********************************************************************* */
+
+video.likedvideonotification {
+    width: 150px !important;
+}
+
+.notificationCenter {
+    display: flex;
+    height: 150px;
+
+}
+
+.notificationListItem {
+    align-self: center;
+    padding-right: 2em;
+}

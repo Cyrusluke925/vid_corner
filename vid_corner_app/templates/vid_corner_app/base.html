@@ -124,7 +124,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <ul>
+                {% for like in likes_list %}
+                <div class='notificationCenter'>
+                <li class='notificationListItem'>{{like.user}} liked your video</li>
+                <video width='50px' class='likedvideonotification'>
+                    <source src='{{like.video.video.url}}'>
+                </video>
+                </div>
+                {% endfor %}
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

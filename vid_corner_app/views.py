@@ -167,9 +167,15 @@ def home(request):
     for subscription in subscriptions:
         if subscription.subscriber_from == request.user:
             subscription_list.append(subscription)
+    likes = VideoLike.objects.all()
+    likes_list = []
+    for like in likes:
+        if like.video.user == request.user:
+            likes_list.append(like)
+        
 
 
-    return render(request, 'vid_corner_app/home.html', {'videos': thevideos, 'subscription_list': subscription_list})
+    return render(request, 'vid_corner_app/home.html', {'videos': thevideos, 'subscription_list': subscription_list, 'likes_list':likes_list})
 
 
 
