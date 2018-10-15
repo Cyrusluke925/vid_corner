@@ -118,11 +118,21 @@ def profile_create(request):
 def profile_view(request):
     user = request.user
     videos = Video_Upload.objects.filter(user = request.user)
-    return render(request, 'vid_corner_app/profile_view.html', {'user': user ,'videos': videos})
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+    return render(request, 'vid_corner_app/profile_view.html', {'user': user ,'videos': videos, 'subscription_list': subscription_list})
 
 
 @login_required
 def video_upload(request):
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
     if request.method == 'POST':
         form = VideoUploadForm(request.POST, request.FILES)
         print(request.FILES)
@@ -144,7 +154,7 @@ def video_upload(request):
         return redirect('home')
     else: 
         form = VideoUploadForm()
-        return render(request,'vid_corner_app/video_upload.html', {'form':form})
+        return render(request,'vid_corner_app/video_upload.html', {'form':form, 'subscription_list':subscription_list})
 
 
 def home(request):
@@ -152,8 +162,20 @@ def home(request):
     paginator = Paginator(videos, 9)
     page = request.GET.get('page')
     thevideos = paginator.get_page(page)
-    
-    return render(request, 'vid_corner_app/home.html', {'videos': thevideos})
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+
+
+    return render(request, 'vid_corner_app/home.html', {'videos': thevideos, 'subscription_list': subscription_list})
+
+
+
+
+
+
 
 @csrf_exempt
 def video_detail(request, pk):
@@ -185,7 +207,13 @@ def video_detail(request, pk):
         
 
     videos = Video_Upload.objects.all()[:5]
-    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes})
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+
+    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes, 'subscription_list': subscription_list})
 
 
 @csrf_exempt

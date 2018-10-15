@@ -149,9 +149,9 @@ aside {
 }
 
 .likeContainer {
-    width: 40%;
+    width: 50%;
     display: flex;
-    justify-content: space-around;
+
 }
 
 .likeList {
@@ -432,6 +432,7 @@ a {
 
 .listItemContainer:hover {
     background-color: lightgrey;
+
 }
 
 
@@ -517,5 +518,39 @@ a {
 
 
 .profile_container {
+    width: 100%;
+}
+
+
+/* ************************************************* SUBSCRIPTION LIST IN SUBSCRIBE 8*********************************************************** */
+
+.singleSubscription {
+    display: flex;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.subscriptionListItem {
+    font-size: 0.8em;
+}
+
+.subscriptionListPicture {
+    margin-right: 1em;
+}
+
+
+.theSubscriptionList {
+    margin-top: 2em;
+    padding-left: 1em;
+    width: 100%;
+}
+
+.singleSubscription:hover {
+    background-color: lightgrey;
+}
+
+.channelsSubscribed {
     width: 100%;
 }
