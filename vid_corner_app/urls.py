@@ -24,6 +24,7 @@ urlpatterns=[
     path('user/<int:pk>/subscribe', views.subscribe, name="subscribe"),
     path('user/<int:pk>/subscription/delete', views.subscription_delete, name='subscription_delete'),
     path('likes', views.view_likes, name='view_likes'),
+    path('feed', views.subscribedVideo, name='subscribedVideo'),
 
     
 

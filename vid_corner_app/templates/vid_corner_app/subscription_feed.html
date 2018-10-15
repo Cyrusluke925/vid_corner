@@ -1,0 +1,25 @@
+{% extends 'vid_corner_app/base.html' %}
+{% load staticfiles %}
+
+{% block subscriptions_feed %}
+<div class='viewLikesContainer'>
+    <div class='likeList'>
+        
+        {% for video in videos %}
+        
+        <div class='likeContainer'>
+            <div class='likedVideo'>
+                <video>
+                    <source src='{{video.video.url}}'>
+                </video>
+            </div>
+            <div class='likedVideoInformation'>
+                <h4>{{video.title}}</h4>
+                <h5>{{video.user.profile.channel_name}}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -154,7 +154,7 @@
                         <i  class="fas fa-home" ></i>
                         <li class="list-item">Home</li>
                         </div></a>
-                        <a class='asideLink' href='#'>
+                        <a class='asideLink' href="{% url 'subscribedVideo' %}">
                         <div class='listItemContainer'>
                         <i  class="fas fa-rss-square" ></i>
                         <li class="list-item">Subscriptions</li>
@@ -192,6 +192,8 @@
     {% block profile_view %}
     {% endblock %}
     {% block view_likes %}
+    {% endblock %}
+    {% block subscriptions_feed %}
     {% endblock %}
     </div>
     </main>

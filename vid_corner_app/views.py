@@ -9,6 +9,7 @@ from .models import Video_Upload, Comment, VideoLike, VideoDislike, Subscribe, U
 from django.utils import timezone
 from django.core.paginator import Paginator
 import json
+from django.db.models import Q
 
 # Create your views here.
 @login_required
@@ -116,6 +117,12 @@ def profile_create(request):
     return render(request, 'vid_corner_app/profile_create.html', {'form': form})
 
 def profile_view(request):
+    likes = VideoLike.objects.all()
+    likes_list = []
+    for like in likes:
+        if like.video.user == request.user:
+            likes_list.append(like)
+
     user = request.user
     videos = Video_Upload.objects.filter(user = request.user)
     subscriptions = Subscribe.objects.all()
@@ -123,11 +130,22 @@ def profile_view(request):
     for subscription in subscriptions:
         if subscription.subscriber_from == request.user:
             subscription_list.append(subscription)
-    return render(request, 'vid_corner_app/profile_view.html', {'user': user ,'videos': videos, 'subscription_list': subscription_list})
+    return render(request, 'vid_corner_app/profile_view.html', {'user': user ,'videos': videos, 'subscription_list': subscription_list, 'likes_list':likes_list})
+
+
+
+
 
 
 @login_required
 def video_upload(request):
+
+
+    likes = VideoLike.objects.all()
+    likes_list = []
+    for like in likes:
+        if like.video.user == request.user:
+            likes_list.append(like)
     subscriptions = Subscribe.objects.all()
     subscription_list = []
     for subscription in subscriptions:
@@ -154,7 +172,7 @@ def video_upload(request):
         return redirect('home')
     else: 
         form = VideoUploadForm()
-        return render(request,'vid_corner_app/video_upload.html', {'form':form, 'subscription_list':subscription_list})
+        return render(request,'vid_corner_app/video_upload.html', {'form':form, 'subscription_list':subscription_list, 'likes_list': likes_list})
 
 
 def home(request):
@@ -211,6 +229,11 @@ def video_detail(request, pk):
     
     numberOfLikes = likes.all().count()
         
+    likes = VideoLike.objects.all()
+    likes_list = []
+    for like in likes:
+        if like.video.user == request.user:
+            likes_list.append(like)
 
     videos = Video_Upload.objects.all()[:5]
     subscriptions = Subscribe.objects.all()
@@ -219,7 +242,7 @@ def video_detail(request, pk):
         if subscription.subscriber_from == request.user:
             subscription_list.append(subscription)
 
-    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes, 'subscription_list': subscription_list})
+    return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes, 'subscription_list': subscription_list, 'likes_list':likes_list})
 
 
 @csrf_exempt
@@ -341,3 +364,28 @@ def view_likes(request):
                 like_list.append(like)
     
     return render(request, 'vid_corner_app/view_likes.html', {'like_list': like_list})
+
+
+
+
+@login_required
+def subscribedVideo(request):
+        subscriptions = list(Subscribe.objects.all())
+        videos = []
+
+        for subscription in subscriptions:
+            if subscription.subscriber_from == request.user:
+                
+                videos = list(Video_Upload.objects.all().order_by('-created_at'))
+                print(videos)
+
+
+                
+        # videos = Video_Upload.objects.filter(
+        #     Q(user=request.user.id) | Q(user__subscriber_to__subscriber_from=User.objects.get(pk=request.user.id))
+        # ).distinct().order_by('-created_at')
+        # print(videos)
+
+
+
+        return render(request, 'vid_corner_app/subscription_feed.html', {'videos': videos})
