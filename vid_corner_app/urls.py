@@ -14,6 +14,7 @@ urlpatterns=[
     path('home', views.home, name="home"),
     path('video/<int:pk>', views.video_detail, name='video_detail'),
     path('profile', views.profile_view, name='profile_view'),
+    path('user/<int:pk>/profile', views.other_profile, name="other_profile"),
 
     
     path('special',views.special, name='special'),

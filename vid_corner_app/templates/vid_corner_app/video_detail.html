@@ -37,14 +37,18 @@
 <section class="userInfo">
     <div class='video_uploader'>
     <div class='pictureAndChannelName'>
-    <img class="user_profile_picture" src='{{video.user.profile.profile_picture.url}}'>
-    <h5 class='channelName'>{{video.user.profile.channel_name}}</h5>
+    <a class='linkToProfile' href="{% url 'other_profile' pk=video.user.id %}"><img class="user_profile_picture" src='{{video.user.profile.profile_picture.url}}'></a>
+
+
+    <a class='linkToProfile' href="{% url 'other_profile' pk=video.user.id %}"><h5 class='channelName'>{{video.user.profile.channel_name}}</h5></a>
     </div>
+    {% if user.is_authenticated %}
     <form class='subscribeForm' method='POST' enctype="multipart/form-data" novalidate>
         <input type='hidden' class='theSubscriberId' value={{request.user.id}}>
         <input type='hidden' class='theSubscribeeId' value={{video.user.id}}>
         <button type='submit' class='subscribeButton'>SUBSCRIBE</button>
     </form>
+    {% endif %}
     
     </div>
     <div class='videoDescription'>
@@ -72,11 +76,13 @@
         {% for comment in video.comments.all %}
 
             <li class='commentAndUser'>
+                <a href="{% url 'other_profile' pk=comment.user.id %}">
                 <div class='commenterPic'>
                 <img src={{comment.user.profile.profile_picture.url}} height='40px' width='auto' class='user_profile_image'>
                 </div>
+                </a>
                 <div class='comment'>
-                    <h5 class='theUser' data-id='{{comment.user}}'>{{comment.user}}</h5>
+                        <a href="{% url 'other_profile' pk=comment.user.id %}"><h5 class='theUser' data-id='{{comment.user}}'>{{comment.user}}</h5></a>
                     <p class='theComment'>{{comment.content}}</p>
                 </div>
 

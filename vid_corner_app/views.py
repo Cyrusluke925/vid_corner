@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm
+from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -62,7 +62,9 @@ def register(request):
             print(user_form.errors)
     else: 
         user_form = UserForm()
-    return render(request, 'vid_corner_app/registration.html', {'user_form': user_form, 'registered': registered})
+    return render(request, 'vid_corner_app/home.html', {'user_form': user_form, 'registered': registered})
+
+
 
 
 
@@ -87,6 +89,11 @@ def user_login(request):
         return render(request, 'vid_corner_app/home.html', {})
 
 
+
+def other_profile(request, pk):
+    user = User.objects.get(id=pk)
+    videos = Video_Upload.objects.filter(user=pk)
+    return render(request, 'vid_corner_app/other_profile.html', {'user': user, 'videos': videos})
 
 
 @login_required
@@ -370,8 +377,14 @@ def view_likes(request):
 
 @login_required
 def subscribedVideo(request):
-        subscriptions = list(Subscribe.objects.all())
-        videos = []
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    videos = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+    
+        
 
         for subscription in subscriptions:
             if subscription.subscriber_from == request.user:
@@ -388,4 +401,4 @@ def subscribedVideo(request):
 
 
 
-        return render(request, 'vid_corner_app/subscription_feed.html', {'videos': videos})
+        return render(request, 'vid_corner_app/subscription_feed.html', {'videos': videos, 'subscriptions_list': subscription_list})
