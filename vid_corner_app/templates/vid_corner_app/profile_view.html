@@ -27,6 +27,20 @@
         </div>
         </div>
     </div>
+    <div class='profileVideos'>
+        <h2>Video Uploads</h2>
+        <div class='profileVideoContainer'>
+            {% for video in videos %}
+            <div class='singleProfileVideo'>
+                <a href="{% url 'video_detail' pk=video.pk %}">
+                <video class='theVideoThumbnail'>
+                    <source src="{{video.video.url}}">
+                </video>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>    
 </body>
 {% endblock %}

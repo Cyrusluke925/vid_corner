@@ -581,3 +581,13 @@ video.likedvideonotification {
 a.linkToProfile {
     color: black;
 }
+
+
+
+
+
+/* *****************************THE PROFILE PAGE ************************************** */
+
+.theVideoThumbnail {
+    width: 300px;
+}
