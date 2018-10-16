@@ -34,5 +34,6 @@ urlpatterns=[
     path('api/dislikes', views.sendJsonDislikes, name='sendJsonDislikes'),
     path('api/comments', views.sendJsonComments, name='sendJsonComments'),
     path('api/subscriptions', views.sendJsonSubscriptions, name='sendJsonSubscriptions'),
+    path('api/users', views.sendJsonUsers, name='sendJsonUsers'),
 ]
 

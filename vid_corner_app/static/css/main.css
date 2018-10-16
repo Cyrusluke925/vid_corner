@@ -5,22 +5,29 @@ body {
     
 }
 main {
-    background-color: #FAFAFA
+    background-color: #fefefe;
     width: 100%;
     height: 100%;
+    
+   
 }
 
 
-.navSearch {
-    align-self: center;
-    justify-self: center;
-    margin-right: 27em;
-    display: flex;
+form.navSearch {
 
+    text-align: center;
+    display: flex;
+    justify-content: center;
     
 }
 
+.theVideos {
+    flex-wrap: wrap;
+}
 
+.homePageMainContent {
+    width: 100%;
+}
 
 ul.nav.nav-pills {
     display: flex;
@@ -188,11 +195,22 @@ aside {
 
 .entirePage {
     max-width: 100%;
+    margin-top: 2em;
+    background-color: #fefefe;
+}
+
+
+.entirePageWhite {
+    max-width: 100%;
+    margin-top: 2em;
+    background-color: white;
 }
 
 .currentPage {
     max-width: 100%;
-    background-color: #FEFEFE;
+    
+    display: flex;
+    margin-top: 2em;
 
 
 
@@ -212,6 +230,7 @@ video {
 
 div.singleVideo {
     width: 200px;
+    margin: 1em 2em;
 }
 
 
@@ -370,12 +389,20 @@ li {
 }
 
 .siteTitle {
-    margin-left: 0.5em;
+    margin-left: 1em;
     margin-top: 1em;
 }
 
-.currentPage {
-    display: flex;
+
+.homePageVideo {
+    box-shadow: 1px 2px 5px;
+}
+
+.jumbotron {
+    background-color: #fefefe;
+    border: 0.5px solid grey;
+    margin-top: 3em;
+    box-shadow: 1px 1px 1px 1px;
 }
 
 
@@ -437,7 +464,11 @@ a {
 
 
 
-
+div.createProfForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 
@@ -461,6 +492,7 @@ a {
 
 nav {
     max-width: 100%;
+    margin-bottom: 3em;
 }
 
 .suggested {
@@ -493,6 +525,10 @@ h6.suggestedVidInfo {
 }
 
 
+header {
+    height: 30px;
+}
+
 .suggestedVidInfo {
     margin-top: 0;
     margin-bottom: 0;
@@ -508,6 +544,7 @@ h6.suggestedVidInfo {
 
     .entirePage {
         margin-right: 3em;
+        
     }
 }
 
@@ -590,4 +627,25 @@ a.linkToProfile {
 
 .theVideoThumbnail {
     width: 300px;
+}
+
+
+
+
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

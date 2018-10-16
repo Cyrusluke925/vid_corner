@@ -55,6 +55,11 @@ function handleMenuClick () {
 	}
 }
 
+
+
+
+
+
 $.ajax({
     method: 'GET',
     url: `http://localhost:8000/api/subscriptions`,
@@ -355,4 +360,91 @@ $.ajax({
 $('.hamburger').on('click', function showSidebar(e) {
     e.preventDefault()
     $('.sideBar').toggleClass('sideBarShow')
+    $('.entirePage').toggleClass('entirePageWhite')
+    
 })
+
+
+$('.ui.form').on('submit', function(e) {
+
+
+    $('.ui.form')
+.form({
+fields: {
+    name: {
+    identifier: 'username',
+    rules: [
+        {
+        type   : 'empty',
+        prompt : 'Please enter your name'
+        }
+    ]
+    },
+    skills: {
+    identifier: 'skills',
+    rules: [
+        {
+        type   : 'minCount[2]',
+        prompt : 'Please select at least two skills'
+        }
+    ]
+    },
+    gender: {
+    identifier: 'gender',
+    rules: [
+        {
+        type   : 'empty',
+        prompt : 'Please select a gender'
+        }
+    ]
+    },
+    username: {
+    identifier: 'username',
+    rules: [
+        {
+        type   : 'empty',
+        prompt : 'Please enter a username'
+        }
+    ]
+    },
+    password: {
+    identifier: 'password',
+    rules: [
+        {
+        type   : 'empty',
+        prompt : 'Please enter a password'
+        },
+        {
+        type   : 'minLength[6]',
+        prompt : 'Your password must be at least {ruleValue} characters'
+        }
+    ]
+    },
+    terms: {
+    identifier: 'terms',
+    rules: [
+        {
+        type   : 'checked',
+        prompt : 'You must agree to the terms and conditions'
+        }
+    ]
+    }
+}
+})
+    e.preventDefault()
+    let formData = $('.ui.form').serialize()
+    $.ajax({
+        method: 'POST',
+        url: `http://localhost:8000/register`,
+        data: formData,
+        success: function onSuccess(e) {
+            window.location = "http://localhost:8000/profile/new"
+        },
+        error: function onError(err1, err2, err3) {
+            console.log(err3)
+        }
+    })
+    
+})
+
+;

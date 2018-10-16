@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm, UserForm
+from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -29,6 +29,10 @@ def sendJsonLikes(request):
     likes = list(VideoLike.objects.all().values('video', 'user'))
     return JsonResponse({'likes': likes})
 
+def sendJsonUsers(request):
+    users = list(User.objects.all().values('username', 'email'))
+    return JsonResponse({'users': users})
+
 
 def sendJsonComments(request):
     comments = list(Comment.objects.all().values('content', 'created_at', 'user', 'video'))
@@ -48,6 +52,7 @@ def JsonResponseVideos(request):
     return JsonResponse({'videos': videos})
 
 def register(request):
+    'ENTERED REGISTERED **********************'
     registered = False
     if request.method == 'POST':
         user_form= UserForm(data=request.POST)
