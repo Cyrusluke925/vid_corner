@@ -67,7 +67,7 @@ def register(request):
             print(user_form.errors)
     else: 
         user_form = UserForm()
-    return render(request, 'vid_corner_app/home.html', {'user_form': user_form, 'registered': registered})
+    return render(request, 'vid_corner_app/registration.html', {'user_form': user_form, 'registered': registered})
 
 
 

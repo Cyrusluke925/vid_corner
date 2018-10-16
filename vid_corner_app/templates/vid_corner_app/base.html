@@ -57,11 +57,12 @@
             <img src="{{request.user.profile.profile_picture.url}}" class='user_profile_image' width="auto" height="40px">
         </a>
         <ul class="dropdown-menu">
+            <li><a href="{% url 'profile_view' %}">Profile</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
         </li>
-        <li><a href="{% url 'video_upload' %}"><i class="fas fa-upload"></i></a></li>
         <li><a href='' data-toggle="modal" data-target="#exampleModalLong"><i class="far fa-bell"></i></a></li>
+        <li><a href="{% url 'video_upload' %}"><i class="fas fa-upload"></i></a></li>
         <div class='asideHamburger'>
         <li class='hamburger'><a  href=''><i class="fas fa-bars"></i></a></li>
         <h3 class='siteTitle'>VidCorner</h3>
@@ -101,20 +102,20 @@
                             <form class="ui form">
                                 {% csrf_token %}
                                     <div class="field">
-                                        <label>First Name</label>
-                                        <input type="text" name="username" placeholder="username">
+                                        <label>Username</label>
+                                        <input class='username' type="text" name="username" placeholder="username">
                                     </div>
                                     <div class="field">
-                                        <label>Last Name</label>
-                                        <input type="email" name="email" placeholder="email">
+                                        <label>Email</label>
+                                        <input class='email' type="email" name="email" placeholder="email">
                                     </div>
                                     <div class="field">
                                             <label>Password</label>
-                                            <input type="password" name="password" placeholder="password">
+                                            <input class='password' type="password" name="password" placeholder="password">
                                         </div>
                                     <div class="field">
                                             <label>Confirm Password</label>
-                                            <input type="password" name="confirm_password" placeholder="confirm password">
+                                            <input class='confirm_password' type="password" name="confirm_password" placeholder="confirm password">
                                             </div>
 
                                     <div class="field">
