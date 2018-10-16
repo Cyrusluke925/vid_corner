@@ -9,12 +9,37 @@ from .models import Video_Upload, Comment, VideoLike, VideoDislike, Subscribe, U
 from django.utils import timezone
 from django.core.paginator import Paginator
 import json
-from django.db.models import Q
 
-# Create your views here.
-@login_required
-def special(request):
-    return HttpResponse("You are logged in !")
+
+
+
+
+
+def home(request):
+    videos = Video_Upload.objects.all().order_by('?')
+    paginator = Paginator(videos, 9)
+    page = request.GET.get('page')
+    thevideos = paginator.get_page(page)
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+    likes = VideoLike.objects.all()
+    likes_list = []
+    for like in likes:
+        if like.video.user == request.user:
+            likes_list.append(like)
+        
+
+
+    return render(request, 'vid_corner_app/home.html', {'videos': thevideos, 'subscription_list': subscription_list, 'likes_list':likes_list})
+
+
+
+
+# ---------------------------API VIEWS -------------------------------------
+
 
 @login_required
 def user_logout(request):
@@ -50,6 +75,9 @@ def sendJsonDislikes(request):
 def JsonResponseVideos(request):
     videos = list(Video_Upload.objects.all().values('user', 'video', 'title', 'description', 'created_at'))
     return JsonResponse({'videos': videos})
+
+
+# ----------------------------- LOGIN AND REGISTER -------------------------------------------
 
 def register(request):
     'ENTERED REGISTERED **********************'
@@ -94,6 +122,8 @@ def user_login(request):
         return render(request, 'vid_corner_app/home.html', {})
 
 
+
+# ---------------------------------PROFILE VIEWS ---------------------------------------------
 
 def other_profile(request, pk):
     user = User.objects.get(id=pk)
@@ -148,6 +178,7 @@ def profile_view(request):
 
 
 
+# ----------------------------------VIDEO VIEWS ----------------------------------------
 
 @login_required
 def video_upload(request):
@@ -186,26 +217,6 @@ def video_upload(request):
         form = VideoUploadForm()
         return render(request,'vid_corner_app/video_upload.html', {'form':form, 'subscription_list':subscription_list, 'likes_list': likes_list})
 
-
-def home(request):
-    videos = Video_Upload.objects.all().order_by('?')
-    paginator = Paginator(videos, 9)
-    page = request.GET.get('page')
-    thevideos = paginator.get_page(page)
-    subscriptions = Subscribe.objects.all()
-    subscription_list = []
-    for subscription in subscriptions:
-        if subscription.subscriber_from == request.user:
-            subscription_list.append(subscription)
-    likes = VideoLike.objects.all()
-    likes_list = []
-    for like in likes:
-        if like.video.user == request.user:
-            likes_list.append(like)
-        
-
-
-    return render(request, 'vid_corner_app/home.html', {'videos': thevideos, 'subscription_list': subscription_list, 'likes_list':likes_list})
 
 
 
@@ -257,6 +268,17 @@ def video_detail(request, pk):
     return render(request, 'vid_corner_app/video_detail.html', {'video': video, 'videos':videos, 'numberOfLikes': numberOfLikes, 'numberOfDislikes': numberOfDislikes, 'subscription_list': subscription_list, 'likes_list':likes_list})
 
 
+# ----------------------------------SUBSCRIPTION VIEWS ----------------------------------------
+
+@csrf_exempt
+def subscription_delete(request, pk):
+    print('YOU ARE DELETING YOUR SUBSCRIPTION NOW')
+    if request.method == 'DELETE':
+        subscription = Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id)
+        subscription.delete()
+    return HttpResponse('subscription deleted')
+
+
 @csrf_exempt
 @login_required
 def subscribe(request, pk):
@@ -277,6 +299,30 @@ def subscribe(request, pk):
             
             return JsonResponse({'subscribe':subscribe})
 
+
+@login_required
+def subscribedVideo(request):
+    subscriptions = Subscribe.objects.all()
+    subscription_list = []
+    videos = []
+    for subscription in subscriptions:
+        if subscription.subscriber_from == request.user:
+            subscription_list.append(subscription)
+    
+        
+
+        for subscription in subscriptions:
+            if subscription.subscriber_from == request.user:
+                
+                videos = list(Video_Upload.objects.all().order_by('-created_at'))
+                print(videos)
+
+
+        return render(request, 'vid_corner_app/subscription_feed.html', {'videos': videos, 'subscriptions_list': subscription_list})
+
+
+
+# ------------------------LIKE AND DISLIKE VIEWS --------------------------------------------
 
 @login_required
 @csrf_exempt
@@ -357,15 +403,6 @@ def video_dislike_delete(request, pk):
 
 
 
-@csrf_exempt
-def subscription_delete(request, pk):
-    print('YOU ARE DELETING YOUR SUBSCRIPTION NOW')
-    if request.method == 'DELETE':
-        subscription = Subscribe.objects.filter(subscriber_to=pk, subscriber_from=request.user.id)
-        subscription.delete()
-    return HttpResponse('subscription deleted')
-
-
 
 def view_likes(request):
     the_likes = list(VideoLike.objects.all())
@@ -376,34 +413,3 @@ def view_likes(request):
                 like_list.append(like)
     
     return render(request, 'vid_corner_app/view_likes.html', {'like_list': like_list})
-
-
-
-
-@login_required
-def subscribedVideo(request):
-    subscriptions = Subscribe.objects.all()
-    subscription_list = []
-    videos = []
-    for subscription in subscriptions:
-        if subscription.subscriber_from == request.user:
-            subscription_list.append(subscription)
-    
-        
-
-        for subscription in subscriptions:
-            if subscription.subscriber_from == request.user:
-                
-                videos = list(Video_Upload.objects.all().order_by('-created_at'))
-                print(videos)
-
-
-                
-        # videos = Video_Upload.objects.filter(
-        #     Q(user=request.user.id) | Q(user__subscriber_to__subscriber_from=User.objects.get(pk=request.user.id))
-        # ).distinct().order_by('-created_at')
-        # print(videos)
-
-
-
-        return render(request, 'vid_corner_app/subscription_feed.html', {'videos': videos, 'subscriptions_list': subscription_list})

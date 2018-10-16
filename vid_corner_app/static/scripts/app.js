@@ -30,35 +30,6 @@ $.ajax({
 })
 
 
-// Global Variables
-var menuButton = document.querySelector('i');
-
-// Menu Click Event Listener
-menuButton.addEventListener('click', handleMenuClick);
-
-// Handle Menu Click
-function handleMenuClick () {
-	// console.log('Click!');
-	var sidebar = document.querySelector('.sidebar');
-
-	if (sidebar.classList.contains('sidebar-hidden')) {
-		sidebar.classList.toggle('sidebar-hidden');
-		menuButton.style.color = '#fff';
-		menuButton.classList
-			.remove('fa-bars')
-			.add('fa-times');
-	} else {
-		sidebar.classList.toggle('sidebar-hidden');
-		menuButton.style.color = '#000';
-		menuButton.classList.remove('fa-times');
-		menuButton.classList.add('fa-bars');
-	}
-}
-
-
-
-
-
 
 $.ajax({
     method: 'GET',
@@ -79,10 +50,6 @@ $.ajax({
         })
     }
 })
-
-
-
-
 
 
 
@@ -108,37 +75,6 @@ $.ajax({
 
 
 
-
-var getType = (function() {
-
-    var objToString = ({}).toString ,
-        typeMap     = {},
-        types = [ 
-          "Boolean", 
-          "Number", 
-          "String",                
-          "Function", 
-          "Array", 
-          "Date",
-          "RegExp", 
-          "Object", 
-          "Error"
-        ];
-
-    for ( var i = 0; i < types.length ; i++ ){
-        typeMap[ "[object " + types[i] + "]" ] = types[i].toLowerCase();
-    };    
-
-    return function( obj ){
-        if ( obj == null ) {
-            return String( obj );
-        }
-        // Support: Safari <= 5.1 (functionish RegExp)
-        return typeof obj === "object" || typeof obj === "function" ?
-            typeMap[ objToString.call(obj) ] || "object" :
-            typeof obj;
-    }
-}());
 
 
 
@@ -183,7 +119,7 @@ $('.videoLike').on('click', function(e) {
                         var value = parseInt($('.likeCounter').text())
                         $('.likeCounter').text(value - 1)
                         
-                        // console.log('already liked so deleting')
+                
                     }
                 })
             }
@@ -207,12 +143,11 @@ $('.videoDislike').on('click', function(e) {
         user: user
     }
 
-    console.log(dislikeInfo)
     var dislikeEndpoint = `http://localhost:8000/video/${videoId}/dislike`
     var deleteEndpoint = `http://localhost:8000/video/${videoId}/dislike/delete`
     e.preventDefault()
 
-   
+
 $.ajax({
     method: "POST",
     url: dislikeEndpoint,
@@ -375,17 +310,17 @@ let confirm_password = $('.confirm_password').val()
 
     e.preventDefault()
     let formData = $('.ui.form').serialize()
-    // $.ajax({
-    //     method: 'POST',
-    //     url: `http://localhost:8000/register`,
-    //     data: formData,
-    //     success: function onSuccess(e) {
-    //         window.location = "http://localhost:8000/profile/new"
-    //     },
-    //     error: function onError(err1, err2, err3) {
-    //         console.log(err3)
-    //     }
-    // })
+    $.ajax({
+        method: 'POST',
+        url: `http://localhost:8000/register`,
+        data: formData,
+        success: function onSuccess(e) {
+            window.location = "http://localhost:8000/profile/new"
+        },
+        error: function onError(err1, err2, err3) {
+            console.log(err3)
+        }
+    })
     
 })
 
