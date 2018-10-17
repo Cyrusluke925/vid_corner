@@ -197,9 +197,10 @@ $('.commentForm').on('submit', function(e) {
     var form = $('.commentForm').serialize()
     var videoId = $('.videoId').attr('value')
     var user = $('.user').attr('value')
-    var username = $('.username').attr('value')
+    var username = $('.theusername').attr('value')
     var commentUserPicture = $('.commentUserPicture').attr('value');
 
+    console.log('This is the Username:' + $('.username').attr('value'))
 
     $('.theComments').prepend(`<ul class='commentList'><li class='commentAndUser'>
     <div class='commenterPic'>
