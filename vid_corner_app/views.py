@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from vid_corner_app.forms import UserForm, UserProfileInfoForm, VideoUploadForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
@@ -9,6 +10,7 @@ from .models import Video_Upload, Comment, VideoLike, VideoDislike, Subscribe, U
 from django.utils import timezone
 from django.core.paginator import Paginator
 import json
+from paypal.standard.forms import PayPalPaymentsForm
 
 
 

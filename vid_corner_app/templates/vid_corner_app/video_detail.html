@@ -8,7 +8,7 @@
 
 <div class='videoAndComments'>
 <!-- <div class ='videoContainer'> -->
-<video preload='auto' controls>
+<video preload='auto' controls autoplay>
     <source src="{{video.video.url}}">
 </video>
     <!-- </div> -->
@@ -68,6 +68,10 @@
         <input type='hidden' class='username' name='username' value='{{request.user.username}}'>
         <input type='hidden' class='commentUserPicture' value='{{request.user.profile.profile_picture.url}}'>
         <input class='commentBox' type='text' name='content' placeholder='Add a public comment...'>
+        <div class="ui fluid action input">
+                <input class='commentBox' type="text" name='content' placeholder="Add a public comment...">
+                <div class="ui button">Add</div>
+              </div>
         <button class='commentButton' type="submit">SUBMIT</button>
     </form>
     {% endif %}

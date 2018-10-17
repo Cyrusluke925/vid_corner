@@ -31,13 +31,14 @@
         <h2>Video Uploads</h2>
         <div class='profileVideoContainer'>
             {% for video in videos %}
-            <div class='singleProfileVideo'>
-                <a href="{% url 'video_detail' pk=video.pk %}">
-                <video class='theVideoThumbnail'>
-                    <source src="{{video.video.url}}">
-                </video>
-                </a>
-            </div>
+            <div class="singleVideo">
+                    <a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=video.pk %}"><video class='homePageVideo' width= 300px>
+                        <source src='{{video.video.url}}' >
+                    </video></a>
+                    <h4>{{video.title}}</h4>
+                    <p class='suggestedVidInfo'>{{video.user.profile.channel_name}}</p>
+                    <h6 class='suggestedVidInfo'>{{video.views}} views</h6>
+                    </div>
             {% endfor %}
         </div>
     </div>

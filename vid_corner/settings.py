@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vid_corner_app',
+    'paypal.standard.ipn',
+    'payment',
 
 ]
 
@@ -141,3 +143,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
 
 
+PAYPAL_RECEIVER_EMAIL = 'sonalis.packtpub-lukelukeluke925@gmail.com'
+PAYPAL_TEST = True

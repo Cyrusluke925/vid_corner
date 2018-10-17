@@ -386,6 +386,11 @@ li {
     width: 100%;
     margin-left: 2em;
     display: flex;
+    
+}
+
+.fa-bars {
+    color: black;
 }
 
 
@@ -398,6 +403,7 @@ li {
 .siteTitle {
     margin-left: 1em;
     margin-top: 1em;
+    color: red
 }
 
 
@@ -431,7 +437,7 @@ aside {
 
 aside.sideBar.sideBarShow {
     height: 100vh;
-    padding-right: 2em;
+    
 }
 
 .listItemContainer {
@@ -440,6 +446,7 @@ aside.sideBar.sideBarShow {
     padding-top: 1em;
     padding-left: 1em;
     padding-bottom: 1em;
+    background-color: #fafafa
 }
 
 .fa-thumbs-up {
@@ -658,4 +665,15 @@ a.linkToProfile {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+
+
+
+
+
+
+.profileVideoContainer {
+    display: flex;
+    flex-wrap: wrap;
 }
