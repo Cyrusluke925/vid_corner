@@ -6,15 +6,14 @@
     <div class='likeList'>
         
         {% for like in like_list %}
-
         <div class='likeContainer'>
             <div class='likedVideo'>
-                <video>
+                    <a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=like.video.pk %}"><video>
                     <source src='{{like.video.video.url}}'>
                 </video>
             </div>
             <div class='likedVideoInformation'>
-                <h4>{{like.video.title}}</h4>
+                    <a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=like.video.pk %}"><h4>{{like.video.title}}</h4></a>
                 <h5>{{like.video.user.profile.channel_name}}</h4>
             </div>
         </div>

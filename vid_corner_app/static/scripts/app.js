@@ -285,6 +285,11 @@ $.ajax({
 
 })
 
+$('.navSearch').on('submit', function(e) {
+    e.preventDefault()
+    alert('THIS FEATURE WILL BE HERE SOON')
+})
+
 
 
 

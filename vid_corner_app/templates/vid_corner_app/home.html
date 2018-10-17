@@ -8,15 +8,16 @@
 {% for video in videos %}
 
 
-
+<a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=video.pk %}">
 <div class="singleVideo">
-<a class='videoLink' data-id={{video.pk}} href="{% url 'video_detail' pk=video.pk %}"><video class='homePageVideo' width= 300px>
+<video class='homePageVideo' width= 300px>
     <source src='{{video.video.url}}' >
-</video></a>
-<h4>{{video.title}}</h4>
+</video>
+<h4 class='suggestedVideoTitle'>{{video.title}}</h4>
 <p class='suggestedVidInfo'>{{video.user.profile.channel_name}}</p>
 <h6 class='suggestedVidInfo'>{{video.views}} views</h6>
 </div>
+</a>
 {% endfor %}
 </div>
 </div>
