@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vid_corner_app',
-    'paypal.standard.ipn',
-    'payment',
+
 
 ]
 

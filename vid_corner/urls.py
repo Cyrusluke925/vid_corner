@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('vid_corner_app.urls')),
-    path('paypal', include('paypal.standard.ipn.urls')),
+
     
 ]
 

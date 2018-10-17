@@ -1,0 +1,1 @@
+web: gunicorn petpals_app.wsgi --log-file -
