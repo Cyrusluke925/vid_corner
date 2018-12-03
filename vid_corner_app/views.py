@@ -82,7 +82,6 @@ def JsonResponseVideos(request):
 # ----------------------------- LOGIN AND REGISTER -------------------------------------------
 
 def register(request):
-    'ENTERED REGISTERED **********************'
     registered = False
     if request.method == 'POST':
         user_form= UserForm(data=request.POST)

@@ -20,9 +20,7 @@ $.ajax({
             if ( videoId == likevidId && currentUserId == likeApiUserId) {
     
                 $('.videoLike').addClass('likeColor')
-            } else {
-                console.log('nope for likes')
-            }
+            } 
                 
             
         })
@@ -38,14 +36,15 @@ $.ajax({
     success: function onSucess(response) {
         response.subscriptions.forEach(function(subscription) {
             subscriber_from = subscription.subscriber_from
-            subscriber_to = subscription.subscriber_to
+            subscriber_to = subscription.subscriber_to;
+            let counter;
             if ( subscriber_from == currentUserId && subscriber_to == theSubscribeeId) {
                 $('.subscribeButton').toggleClass('subscribed')
                 $('.subscribeButton').text('SUBSCRIBED')
-            } else {
-                console.log('nope for subscribes')
-            }
-                
+            } 
+
+            
+
             
         })
     }
@@ -59,16 +58,13 @@ $.ajax({
     url: 'http://localhost:8000/api/dislikes',
     async: false,
     success: function dislikeOnSucess(response) {
-        console.log(response)
         response.dislikes.forEach(function(dislike) {
             dislikeVidId = dislike.video
             dislikeApiUserId = dislike.user
             if ( videoId == dislikeVidId && currentUserId == dislikeApiUserId) {
     
                 $('.videoDislike').addClass('likeColor')
-            } else {
-                console.log('nope for dislikes')
-            }
+            } 
         })
     }
 })
@@ -153,7 +149,7 @@ $.ajax({
     url: dislikeEndpoint,
     data: dislikeInfo,
     success: function dislikeSuccess(json) {
-        console.log(json)
+
 
         if (json.dislikes.length !== 0) {
             $('.videoDislike').addClass('likeColor')
@@ -200,7 +196,6 @@ $('.commentForm').on('submit', function(e) {
     var username = $('.theusername').attr('value')
     var commentUserPicture = $('.commentUserPicture').attr('value');
 
-    console.log('This is the Username:' + $('.username').attr('value'))
 
     $('.theComments').prepend(`<ul class='commentList'><li class='commentAndUser'>
     <div class='commenterPic'>
@@ -259,7 +254,6 @@ $.ajax({
         url: `http://localhost:8000/user/${subscriber_to}/subscribe`,
         data: subscriberData,
         success: function onSuccess(response) {
-            console.log(response)
             if (response.subscribe.length === 0) {
                 $.ajax({
                     method: "DELETE",

@@ -14,6 +14,7 @@ main {
 }
 
 
+
 .theUser {
     color: black;
 }
@@ -32,6 +33,9 @@ form.navSearch {
 .homePageMainContent {
     width: 100%;
     margin-top: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 ul.nav.nav-pills {
@@ -47,6 +51,14 @@ ul.nav.nav-pills {
     line-height: 24px;
 }
 
+
+.newVidPost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+    
+}
 .descriptionText {
     font-size: 12px;
     font-weight: 400;
@@ -110,6 +122,10 @@ textarea:focus, input:focus, button:focus{
 }
 
 
+.likeCounter, .dislikeCounter {
+    margin-top: 1em;
+    margin-left: 0.5em;
+}
 
 .commentButton {
     float: right;
@@ -361,6 +377,7 @@ li {
 .commentAndUser {
     display: flex;
     margin-bottom: 2em;
+    margin-top: 1em;
 }
 
 .comment {
@@ -384,7 +401,10 @@ li {
     margin-left: 2em;
     font-size: 1.2em;
     text-decoration: none;
+    color: black;
 }
+
+
 
 .navSearch {
     width: 100%;
@@ -495,6 +515,12 @@ a {
 
 .listItemContainer:hover {
     background-color: lightgrey;
+    color: red;
+
+}
+
+.li-item:hover {
+    color: #FF0000;
 
 }
 
