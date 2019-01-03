@@ -10,7 +10,7 @@ from .models import Video_Upload, Comment, VideoLike, VideoDislike, Subscribe, U
 from django.utils import timezone
 from django.core.paginator import Paginator
 import json
-from paypal.standard.forms import PayPalPaymentsForm
+
 
 
 
@@ -82,7 +82,6 @@ def JsonResponseVideos(request):
 # ----------------------------- LOGIN AND REGISTER -------------------------------------------
 
 def register(request):
-    'ENTERED REGISTERED **********************'
     registered = False
     if request.method == 'POST':
         user_form= UserForm(data=request.POST)

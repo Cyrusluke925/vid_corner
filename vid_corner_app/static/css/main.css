@@ -14,6 +14,10 @@ main {
 }
 
 
+
+.theUser {
+    color: black;
+}
 form.navSearch {
 
     text-align: center;
@@ -29,6 +33,9 @@ form.navSearch {
 .homePageMainContent {
     width: 100%;
     margin-top: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 ul.nav.nav-pills {
@@ -44,6 +51,14 @@ ul.nav.nav-pills {
     line-height: 24px;
 }
 
+
+.newVidPost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+    
+}
 .descriptionText {
     font-size: 12px;
     font-weight: 400;
@@ -107,6 +122,10 @@ textarea:focus, input:focus, button:focus{
 }
 
 
+.likeCounter, .dislikeCounter {
+    margin-top: 1em;
+    margin-left: 0.5em;
+}
 
 .commentButton {
     float: right;
@@ -357,6 +376,8 @@ li {
 
 .commentAndUser {
     display: flex;
+    margin-bottom: 2em;
+    margin-top: 1em;
 }
 
 .comment {
@@ -380,7 +401,10 @@ li {
     margin-left: 2em;
     font-size: 1.2em;
     text-decoration: none;
+    color: black;
 }
+
+
 
 .navSearch {
     width: 100%;
@@ -491,6 +515,12 @@ a {
 
 .listItemContainer:hover {
     background-color: lightgrey;
+    color: red;
+
+}
+
+.li-item:hover {
+    color: #FF0000;
 
 }
 
@@ -498,8 +528,11 @@ a {
 
 div.createProfForm {
     display: flex;
+    position: absolute;
+    z-index: 30;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 
@@ -664,7 +697,7 @@ a.linkToProfile {
 
 /* *****************************THE PROFILE PAGE ************************************** */
 
-.theVideoThumbnail {
+/* .theVideoThumbnail {
     width: 300px;
 }
 
@@ -698,4 +731,29 @@ a.linkToProfile {
 .profileVideoContainer {
     display: flex;
     flex-wrap: wrap;
-}
+} */
+
+.fullscreen-bg{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: -20vh;
+   }
+   .fullscreen-bg video{
+     /* Make video to at least 100% wide and tall */
+     min-width: 100%;
+     min-height: 100%;
+   
+     /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+     width: auto;
+     height: auto;
+   
+     /* Center the video */
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%,-50%);
+   }

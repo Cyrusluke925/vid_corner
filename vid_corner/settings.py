@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vid_corner_app',
-    'paypal.standard.ipn',
-    'payment',
+
 
 ]
 
@@ -57,7 +56,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
 ]
 
 ROOT_URLCONF = 'vid_corner.urls'
